@@ -3,22 +3,25 @@
 ### [Ссылка на описание задачи](https://github.com/netology-code/qamid-diplom)
 
 ## Цели тестирования:
-- покрыть автотестами функционал приложения "V Hospice", автоматизировать позитивные и негативные сценарии;
+- покрыть автотестами функционал приложения "V Hospice", автоматизировать проверку всех сценариев (с ID 1 по ID 31);
 - покрыть автотестами UI-тесты.
 
 ## Чеклист проверок
 
-Чеклист проверок с результатами приведены по [ссылке](https://docs.google.com/spreadsheets/d/1L6OcCOYAw8rIiKYde54BiVWuGujCbI8tzLi6tzqk1ok/edit?usp=sharing)
+Чеклист проверок с результатами приведены по [ссылке](https://docs.google.com/spreadsheets/d/1L6OcCOYAw8rIiKYde54BiVWuGujCbI8tzLi6tzqk1ok/edit?usp=sharing) и в файле [Check.xlsx](Check.xlsx)
 
 ## Тестовые сценарии
 
-Тестовые сценарии приведены по [ссылке](https://docs.google.com/spreadsheets/d/1FjiYGykDLcM3LeV6EofcYb6LJZafxKeE2aL9moy5xuY/edit?usp=sharing)
+Тестовые сценарии приведены по [ссылке](https://docs.google.com/spreadsheets/d/1FjiYGykDLcM3LeV6EofcYb6LJZafxKeE2aL9moy5xuY/edit?usp=sharing) и в файле [Cases.xlsx](Cases.xlsx)
 
 ## Используемые инструменты
 - Android Studio - официальная среда разработки (IDE) для создания и тестирования приложений под Android;
 - Git/GitHub - система контроля версий с самым большим количеством пользователей;
-- Framework: Appium, JavaScript, JUnit5 - популярный фреймворк для тестирования;
+- Framework: Espresso + UI Automator, Java, JUnit4 - популярный фреймворк для тестирования;
 - Allure - фреймворк для генерации отчетов по результатам тестирования.
+
+## Окружение для тестирования
+- эмулятор Google Pixel 3a – Android 10 (API 29) 
 
 ## Возможные риски при автоматизации
 - изменения требований;
