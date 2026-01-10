@@ -1,4 +1,4 @@
-package ru.iteco.fmhandroid.ui;
+package ru.iteco.fmhandroid.ui.auxiliaries;
 
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
@@ -16,13 +16,13 @@ import org.hamcrest.Matcher;
 
 import java.util.concurrent.TimeoutException;
 
-public class AuxViewMatcher {
+public class CustomViewMatcher {
     /**
      * Perform action of waiting for a specific view id to be displayed.
      * @param viewId The id of the view to wait for.
      * @param millis The timeout of until when to wait for.
      */
-    public static ViewAction waitDisplayed(final int viewId, final long millis) {
+    public static ViewAction waitUntilDisplayed(final int viewId, final long millis) {
         return new ViewAction() {
             @Override
             public Matcher<View> getConstraints() {

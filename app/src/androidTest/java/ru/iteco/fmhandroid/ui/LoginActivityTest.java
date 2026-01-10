@@ -1,6 +1,5 @@
 package ru.iteco.fmhandroid.ui;
 
-
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
@@ -11,11 +10,9 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDescendantOfA;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withParent;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
-
 import static org.hamcrest.Matchers.allOf;
-import static ru.iteco.fmhandroid.ui.AuxViewMatcher.waitDisplayed;
+import static ru.iteco.fmhandroid.ui.auxiliaries.CustomViewMatcher.waitUntilDisplayed;
 
 import android.widget.EditText;
 
@@ -29,38 +26,28 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import ru.iteco.fmhandroid.R;
+import ru.iteco.fmhandroid.ui.auxiliaries.DataHelper;
+import ru.iteco.fmhandroid.ui.screens.AuthorizationScreen;
+import ru.iteco.fmhandroid.ui.screens.MainScreen;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class LoginActivityTest {
+public class LoginActivityTest extends AuthBaseTest {
+
+   private AuthorizationScreen authScreen = new AuthorizationScreen();
+   private MainScreen mainScreen = new MainScreen();
 
     @Rule
     public ActivityScenarioRule<AppActivity> mActivityScenarioRule =
             new ActivityScenarioRule<>(AppActivity.class);
 
-
-
     @Test
-    public void loginActivityTest() {
-        onView(isRoot()).perform(waitDisplayed(R.id.login_text_input_layout, 5000));
-
-        ViewInteraction loginInputField = onView(allOf(
-                isAssignableFrom(EditText.class),
-                isDescendantOfA(withId(R.id.login_text_input_layout))));
-                loginInputField.check(matches(isDisplayed()));
-        loginInputField.perform(replaceText("login2"), closeSoftKeyboard());
-
-        ViewInteraction passwordInputField = onView(allOf(
-                isAssignableFrom(EditText.class),
-                isDescendantOfA(withId(R.id.password_text_input_layout))));
-        passwordInputField.check(matches(isDisplayed()));
-        passwordInputField.perform(replaceText("password2"), closeSoftKeyboard());
-
-        ViewInteraction signInButton = onView(withId(R.id.enter_button));
-        signInButton.check(matches(isDisplayed()));
-        signInButton.perform(click());
-
-        onView(isRoot()).perform(waitDisplayed(R.id.all_news_text_view, 5000));
+    public void loginSuccessfulTest() {
+        authScreen.waitUntilIsDisplayed();
+        authScreen.setLogin(DataHelper.getValidCredentials().getLogin());
+        authScreen.setPassword(DataHelper.getValidCredentials().getPassword());
+        authScreen.submit();
+        mainScreen.waitUntilIsDisplayed();
         ViewInteraction textView = onView(withId(R.id.all_news_text_view));
         textView.check(matches(isDisplayed()));
         textView.check(matches(withText("ALL NEWS")));
