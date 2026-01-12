@@ -7,7 +7,7 @@ import androidx.test.platform.app.InstrumentationRegistry;
 
 import org.junit.Before;
 
-public abstract class AuthBaseTest {
+public abstract class BaseTestLogin extends BaseTest {
 
     @Before
     public void resetAuth() {
