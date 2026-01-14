@@ -17,13 +17,23 @@ android {
 
     defaultConfig {
         applicationId "ru.iteco.fmhandroid"
-        minSdkVersion 21
+        minSdkVersion 26
         targetSdkVersion 32
         versionCode 14
         versionName "1.0.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        testInstrumentationRunnerArguments clearPackageData: 'true'
+        testInstrumentationRunner "ru.iteco.fmhandroid.ui.auxiliaries.AndroidAllureTestRunner"
+    }
+
+    tasks.register("runTestsNoUninstall") {
+        dependsOn "installDebug", "installDebugAndroidTest"
+        doLast {
+            exec {
+                commandLine "adb", "shell", "am", "instrument", "-w",
+                        "ru.iteco.fmhandroid.test/" +
+                                "ru.iteco.fmhandroid.ui.auxiliaries.AndroidAllureTestRunner"
+            }
+        }
     }
 
     compileOptions {
@@ -33,10 +43,6 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
-    }
-
-    testOptions {
-        execution 'ANDROIDX_TEST_ORCHESTRATOR'
     }
 
     buildFeatures {
@@ -98,6 +104,7 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:1.1.5"
     androidTestImplementation "androidx.test.espresso:espresso-core:3.5.1"
 
-    androidTestUtil "androidx.test:orchestrator:1.4.2"
-//    androidTestImplementation 'io.qameta.allure:allure-rotlin-android:2.4.0'
+    androidTestImplementation "io.qameta.allure:allure-kotlin-junit4:2.4.0"
+    androidTestImplementation 'io.qameta.allure:allure-kotlin-android:2.4.0'
+    androidTestImplementation "io.qameta.allure:allure-kotlin-commons:2.4.0"
 }

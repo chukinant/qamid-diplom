@@ -1,12 +1,21 @@
 package ru.iteco.fmhandroid.ui;
 
-import androidx.test.ext.junit.rules.ActivityScenarioRule;
+import android.content.Context;
 
-import org.junit.Rule;
+import androidx.test.platform.app.InstrumentationRegistry;
+
+import org.junit.Before;
 
 public class BaseTest {
+    @Before
+    public void clearAuthState() {
+        Context context = InstrumentationRegistry
+                .getInstrumentation()
+                .getTargetContext();
 
-    @Rule
-    public ActivityScenarioRule<AppActivity> mActivityScenarioRule =
-            new ActivityScenarioRule<>(AppActivity.class);
+        context.getSharedPreferences("auth", Context.MODE_PRIVATE)
+                .edit()
+                .clear()
+                .commit();
+    }
 }

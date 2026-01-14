@@ -6,11 +6,9 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
-import static ru.iteco.fmhandroid.ui.auxiliaries.CustomViewWaiter.waitUntilDisplayed;
+import static ru.iteco.fmhandroid.ui.auxiliaries.ViewWaiterAndMatcher.waitUntilDisplayed;
 
 import androidx.test.espresso.ViewInteraction;
-
-import org.junit.Before;
 
 import ru.iteco.fmhandroid.R;
 

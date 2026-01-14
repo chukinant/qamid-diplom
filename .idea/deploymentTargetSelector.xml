@@ -8,10 +8,13 @@
       <SelectionState runConfigName="loginActivityTest()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="appLaunches()">
+      <SelectionState runConfigName="loginSuccessfulTest()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="loginSuccessfulTest()">
+      <SelectionState runConfigName="LoginActivityTests">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="loginWithEmptyLoginAndPassword()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>

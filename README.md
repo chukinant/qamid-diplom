@@ -3,14 +3,14 @@
 
 Шаги:
 1. Запустить Android Studio.
-2. Скачать репозиторий с автотестами запустив в терминале команду `git clone --single-branch --branch main {url репозитория} {название папки (опционально)}`.
-3. Если репозиторий уже был скачен, то перейти в папку проекта и убедиться что в файлах отражены последние изменения, запустив команду `git pull`.
-6. Сгенерировать .apk-файл (Build -> Generate App Bundles or APKs -> Generate APKs)
-7. Запустить эмулятор из предусловия.
-8. Установить на эмуляторе сгенерированный .apk файл.
-7. Отключить анимацию на устройстве:
-`adb shell settings put global window_animation_scale 0
-adb shell settings put global transition_animation_scale 0
-adb shell settings put global animator_duration_scale 0`
-7. Открыть другое окно терминала, запустить команду `./gradlew clean test --stacktrace --info`
-7. Для получения отчета Allure запустить `./gradlew allureReport`, далее открыть сгенерированный index.html из папки .\build\reports\allure-report\allureReport\
+2. Скачать репозиторий с автотестами запустив в терминале команду `git clone --branch main git@github.com:chukinant/qamid-diplom.git` (в  общем случае: `git clone --single-branch --branch main {url репозитория} {название папки (опционально)}`).
+3. Если репозиторий уже был скачен ранее, то перейти в папку проекта и убедиться что в файлах отражены последние изменения, запустив команду `git pull`.
+4. Запустить эмулятор из предусловия.
+5. Отключить анимацию на устройстве:
+`adb shell settings put global window_animation_scale 0`
+`adb shell settings put global transition_animation_scale 0`
+`adb shell settings put global animator_duration_scale 0`
+6. Для запуска всех тестов в терминале запустить команду `./gradlew ConnectedAndroidTest`. 
+ Для запуска всех тестов из конкретного класса нужно запускать с флагом, например `./gradlew app:connectedAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=ru.iteco.fmhandroid.LoginActivityTests`
+7. Для получения отчета Allure запустить Device Explorer, в дереве найти папку /data/data/ru.iteco.fmhandroid/files/allure-results, затем правой кнопкой мыши нажать на папку files, выбрать "Save As", далее сохранить в \app\build\
+После этого выполнить `allure serve ./build/` для генерации отчета.

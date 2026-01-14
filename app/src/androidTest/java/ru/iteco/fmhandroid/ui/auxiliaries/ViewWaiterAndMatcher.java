@@ -16,7 +16,7 @@ import org.hamcrest.Matcher;
 
 import java.util.concurrent.TimeoutException;
 
-public class CustomViewWaiter {
+public class ViewWaiterAndMatcher {
     /**
      * Perform action of waiting for a specific view id to be displayed.
      * @param viewId The id of the view to wait for.

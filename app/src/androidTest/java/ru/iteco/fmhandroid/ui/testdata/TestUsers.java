@@ -12,5 +12,5 @@ public final class TestUsers {
             new Credentials("", "");
 
     public static final Credentials WRONG =
-            new Credentials("llogin", "ppassword");
+            new Credentials("login", "password");
 }
