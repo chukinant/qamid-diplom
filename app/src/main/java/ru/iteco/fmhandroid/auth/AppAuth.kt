@@ -2,6 +2,7 @@ package ru.iteco.fmhandroid.auth
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import dagger.hilt.android.qualifiers.ApplicationContext
 import ru.iteco.fmhandroid.dto.AuthState
 import javax.inject.Inject
@@ -32,6 +33,8 @@ class AppAuth @Inject constructor(
     }
 
     private fun createInitialAuthState(): AuthState? {
+        val access = prefs.getString("access", null)
+        Log.d("AUTH_CHECK", "access=$access")
         val accessToken1 = prefs.getString(accessTokenKey, null)
         return if (accessToken1 == null) null else {
             val refreshToken1 = prefs.getString(refreshTokenKey, null)
