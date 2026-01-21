@@ -8,13 +8,16 @@
       <SelectionState runConfigName="loginSuccessfulTest()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="LoginActivityTests">
+      <SelectionState runConfigName="loginWithWrongLoginAndPassword()">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="successfulLogout()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
       <SelectionState runConfigName="loginWithEmptyLoginAndPassword()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="navigationFromMainToAboutScreen()">
+      <SelectionState runConfigName="loginWithEmptyLogin()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>

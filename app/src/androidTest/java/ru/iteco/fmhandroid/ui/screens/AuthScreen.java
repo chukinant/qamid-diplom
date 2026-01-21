@@ -15,7 +15,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.Matchers.allOf;
-import static ru.iteco.fmhandroid.ui.auxiliaries.ViewWaiterAndMatcher.waitUntilDisplayed;
+import static ru.iteco.fmhandroid.ui.utils.ViewWaiterAndMatcher.waitUntilDisplayed;
 
 import android.view.View;
 import android.widget.EditText;
@@ -29,7 +29,7 @@ public class AuthScreen {
 
     private AuthScreen() {}
 
-    private static final int viewID = R.id.login_text_input_layout;
+    private static final int viewID = R.id.password_text_input_layout;
     private static final ViewInteraction loginInputField = onView(allOf(
             isAssignableFrom(EditText.class),
             isDescendantOfA(withId(R.id.login_text_input_layout))));
@@ -43,6 +43,15 @@ public class AuthScreen {
 
     public static void  waitUntilIsDisplayed () {
         onView(isRoot()).perform(waitUntilDisplayed(viewID, 5000));
+    }
+
+    public static boolean assertIsOnScreen() {
+        onView(withId(viewID)).check(matches(isDisplayed()));
+        return true;
+    }
+
+    public static int getRootViewId() {
+        return viewID;
     }
 
     private static void enterLogin (String login) {

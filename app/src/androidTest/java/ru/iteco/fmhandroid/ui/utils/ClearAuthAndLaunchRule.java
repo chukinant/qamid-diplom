@@ -1,8 +1,7 @@
-package ru.iteco.fmhandroid.ui.auxiliaries;
+package ru.iteco.fmhandroid.ui.utils;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.SharedPreferences;
 
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.platform.app.InstrumentationRegistry;

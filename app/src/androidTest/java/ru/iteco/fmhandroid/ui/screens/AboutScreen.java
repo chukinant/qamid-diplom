@@ -7,7 +7,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
-import static ru.iteco.fmhandroid.ui.auxiliaries.ViewWaiterAndMatcher.waitUntilDisplayed;
+import static ru.iteco.fmhandroid.ui.utils.ViewWaiterAndMatcher.waitUntilDisplayed;
 
 import androidx.test.espresso.ViewInteraction;
 
@@ -25,6 +25,11 @@ public class AboutScreen {
 
     public static void waitUntilIsDisplayed () {
         onView(isRoot()).perform(waitUntilDisplayed(versionLabelID, 5000));
+    }
+
+    public static boolean isOnScreen() {
+        onView(withId(versionLabelID)).check(matches(isDisplayed()));
+        return true;
     }
     public static void assertVersionLabelIsDisplayed () {
         waitUntilIsDisplayed();

@@ -1,12 +1,12 @@
 plugins {
     id 'com.android.application'
-    id 'com.google.gms.google-services'
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
     id 'kotlin-parcelize'
     id 'androidx.navigation.safeargs.kotlin'
-    id 'com.google.firebase.crashlytics'
+//    id 'com.google.firebase.crashlytics'
+//    id 'com.google.gms.google-services'
 }
 
 android {
@@ -22,7 +22,7 @@ android {
         versionCode 14
         versionName "1.0.0"
 
-        testInstrumentationRunner "ru.iteco.fmhandroid.ui.auxiliaries.AndroidAllureTestRunner"
+        testInstrumentationRunner "ru.iteco.fmhandroid.ui.utils.AndroidAllureTestRunner"
     }
 
     tasks.register("runTestsNoUninstall") {
@@ -31,7 +31,7 @@ android {
             exec {
                 commandLine "adb", "shell", "am", "instrument", "-w",
                         "ru.iteco.fmhandroid.test/" +
-                                "ru.iteco.fmhandroid.ui.auxiliaries.AndroidAllureTestRunner"
+                                "ru.iteco.fmhandroid.ui.utils.AndroidAllureTestRunner"
             }
         }
     }
@@ -104,7 +104,6 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:1.1.5"
     androidTestImplementation "androidx.test.espresso:espresso-core:3.5.1"
 
+    androidTestImplementation "io.qameta.allure:allure-kotlin-android:2.4.0"
     androidTestImplementation "io.qameta.allure:allure-kotlin-junit4:2.4.0"
-    androidTestImplementation 'io.qameta.allure:allure-kotlin-android:2.4.0'
-    androidTestImplementation "io.qameta.allure:allure-kotlin-commons:2.4.0"
 }

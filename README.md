@@ -10,7 +10,7 @@
 `adb shell settings put global window_animation_scale 0`
 `adb shell settings put global transition_animation_scale 0`
 `adb shell settings put global animator_duration_scale 0`
-6. Для запуска всех тестов в терминале запустить команду `./gradlew ConnectedAndroidTest`. 
- Для запуска всех тестов из конкретного класса нужно запускать с флагом, например `./gradlew app:connectedAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=ru.iteco.fmhandroid.LoginActivityTests`
-7. Для получения отчета Allure запустить Device Explorer, в дереве найти папку /data/data/ru.iteco.fmhandroid/files/allure-results, затем правой кнопкой мыши нажать на папку files, выбрать "Save As", далее сохранить в \app\build\
+6. Для запуска всех тестов в терминале запустить кастомную команду `./gradlew runTestsNoUninstall`. 
+ Для запуска всех тестов из конкретного класса нужно запускать с флагом, например `./gradlew app:runTestsNoUninstall "-Pandroid.testInstrumentationRunnerArguments.class=ru.iteco.fmhandroid.ui.tests.LoginActivityTests"`
+7. Для получения отчета Allure запустить Device Explorer, в дереве найти папку /data/data/ru.iteco.fmhandroid/files/allure-results, затем правой кнопкой мыши нажать на папку files, выбрать "Save As", далее сохранить в ./app/build/
 После этого выполнить `allure serve ./build/` для генерации отчета.
