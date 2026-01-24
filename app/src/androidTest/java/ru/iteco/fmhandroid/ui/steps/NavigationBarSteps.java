@@ -8,28 +8,83 @@ import org.junit.Test;
 import io.qameta.allure.kotlin.Allure;
 import io.qameta.allure.kotlin.Step;
 import ru.iteco.fmhandroid.ui.screens.AuthScreen;
+import ru.iteco.fmhandroid.ui.screens.MainScreen;
 import ru.iteco.fmhandroid.ui.screens.NavigationBar;
 
 public class NavigationBarSteps {
 
     public void expandNavigationDrawer() {
         Allure.step("User taps on navigation drawer button");
-        NavigationBar.hamburgerButton.perform(click());
+        NavigationBar.tapOnNavigationDrawer();
     }
 
     public void tapOnAboutButton() {
         Allure.step("User taps on 'About' button");
-        NavigationBar.navigationDrawerButtonAbout.perform(click());
+        NavigationBar.tapOnAboutButton();
     }
 
     public void tapProfileButton() {
-        Allure.step("User taps on 'About' button");
-        NavigationBar.profileButton.perform(click());
+        Allure.step("User taps on profile button");
+        NavigationBar.tapOnProfileButton();
     }
 
     public void tapLogoutButton() {
         Allure.step("User taps on 'Logout' button");
-        NavigationBar.profileButtonLogout.perform(click());
+        NavigationBar.tapLogoutButton();
     }
 
+    public void tapMainButton() {
+        Allure.step("User taps on 'Main' button");
+        NavigationBar.tapOnMainButton();
+    }
+
+    public void tapNewsButton() {
+        Allure.step("User taps on 'News' button");
+        NavigationBar.tapOnNewsButton();
+    }
+
+    public void tapOurMissionButton() {
+        Allure.step("User taps on 'Our mission' button");
+        NavigationBar.tapOnOurMissionButton();
+    }
+
+    public void assertIsDisplayed() {
+        Allure.step("Navigation bar is displayed");
+        NavigationBar.assertIsOnScreen();
+    }
+
+    public void assertNavigationDrawerButtonIsDisplayed() {
+        Allure.step("Navigation drawer is displayed");
+        NavigationBar.assertHamburgerButtonIsDisplayed();
+    }
+
+    public void assertOurMissionButtonIsDisplayed() {
+        Allure.step("Our mission button is displayed");
+        NavigationBar.assertOurMissionButtonIsDisplayed();
+    }
+
+    public void assertProfileButtonIsDisplayed() {
+        Allure.step("Profile button is displayed");
+        NavigationBar.assertProfileButtonIsDisplayed();
+    }
+
+    public void assertProfileButtonLogoutIsDisplayed() {
+        Allure.step("Logout button is displayed");
+        NavigationBar.assertProfileButtonLogoutIsDisplayed();
+    }
+
+    public void assertNewsButtonIsDisplayed() {
+        Allure.step("News button is displayed");
+        NavigationBar.assertNavigationDrawerButtonNewsIsDisplayed();
+    }
+
+    public void assertAboutButtonIsDisplayed() {
+        Allure.step("About button is displayed");
+        NavigationBar.assertNavigationDrawerButtonAboutIsDisplayed();
+    }
+
+    public void assertMainButtonIsDisplayed() {
+        Allure.step("Main button is displayed");
+        NavigationBar.assertNavigationDrawerButtonMainIsDisplayed();
+    }
 }

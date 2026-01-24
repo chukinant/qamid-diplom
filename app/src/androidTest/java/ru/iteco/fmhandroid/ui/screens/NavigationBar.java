@@ -13,40 +13,102 @@ import static org.hamcrest.Matchers.allOf;
 
 import androidx.test.espresso.ViewInteraction;
 
+import io.qameta.allure.kotlin.Allure;
 import ru.iteco.fmhandroid.R;
 
 public class NavigationBar {
 
     private NavigationBar() {}
 
-    private static final int viewID = R.id.nav_host_fragment;
-    public static final ViewInteraction hamburgerButton = onView(allOf(
+    private static final int viewID = R.id.main_menu_image_button;
+    private static final ViewInteraction hamburgerButton = onView(allOf(
             withId(R.id.main_menu_image_button),
             withContentDescription("Main menu")));
 
-    public static final ViewInteraction ourMissionButton = onView(allOf(
+    private static final ViewInteraction ourMissionButton = onView(allOf(
             withId(R.id.main_menu_image_button),
             withContentDescription("Our Mission")));
 
-    public static final ViewInteraction profileButton = onView(
+    private static final ViewInteraction profileButton = onView(
             withId(R.id.authorization_image_button));
 
-    public static final ViewInteraction navigationDrawerButtonMain = onView(allOf(
-            withId(android.R.id.title), withText("Main")));
+    private static final ViewInteraction navigationDrawerButtonMain = onView(allOf(
+            withId(android.R.id.title), withText(R.string.main)));
 
-    public static final ViewInteraction navigationDrawerButtonNews = onView(allOf(
-            withId(android.R.id.title), withText("News")));
+    private static final ViewInteraction navigationDrawerButtonNews = onView(allOf(
+            withId(android.R.id.title), withText(R.string.news)));
 
-    public static final ViewInteraction navigationDrawerButtonAbout = onView(allOf(
-            withId(android.R.id.title), withText("About")));
+    private static final ViewInteraction navigationDrawerButtonAbout = onView(allOf(
+            withId(android.R.id.title), withText(R.string.about)));
 
-    public static final ViewInteraction profileButtonLogout = onView(allOf(
-            withId(android.R.id.title), withText("Log out")));
+    private static final ViewInteraction profileButtonLogout = onView(allOf(
+            withId(android.R.id.title), withText(R.string.log_out)));
 
     public static void logout () {
         profileButton.check(matches(isDisplayed()));
         profileButton.perform(click());
         profileButtonLogout.check(matches(isDisplayed()));
         profileButtonLogout.perform(click());
+    }
+
+    public static boolean assertIsOnScreen() {
+        onView(withId(viewID)).check(matches(isDisplayed()));
+        return true;
+    }
+
+    public static void tapOnNavigationDrawer() {
+        hamburgerButton.perform(click());
+    }
+
+    public static void tapOnMainButton() {
+        navigationDrawerButtonMain.perform(click());
+    }
+
+    public static void tapOnNewsButton() {
+        navigationDrawerButtonNews.perform(click());
+    }
+
+    public static void tapOnAboutButton() {
+        navigationDrawerButtonAbout.perform(click());
+    }
+
+    public static void tapOnOurMissionButton() {
+        ourMissionButton.perform(click());
+    }
+
+    public static void tapOnProfileButton() {
+        profileButton.perform(click());
+    }
+
+    public static void tapLogoutButton() {
+        profileButtonLogout.perform(click());
+    }
+
+    public static void assertHamburgerButtonIsDisplayed () {
+        hamburgerButton.check(matches(isDisplayed()));
+    }
+
+    public static void assertOurMissionButtonIsDisplayed () {
+        ourMissionButton.check(matches(isDisplayed()));
+    }
+
+    public static void assertProfileButtonIsDisplayed () {
+        profileButton.check(matches(isDisplayed()));
+    }
+
+    public static void assertNavigationDrawerButtonMainIsDisplayed () {
+        navigationDrawerButtonMain.check(matches(isDisplayed()));
+    }
+
+    public static void assertNavigationDrawerButtonNewsIsDisplayed () {
+        navigationDrawerButtonNews.check(matches(isDisplayed()));
+    }
+
+    public static void assertNavigationDrawerButtonAboutIsDisplayed () {
+        navigationDrawerButtonAbout.check(matches(isDisplayed()));
+    }
+
+    public static void assertProfileButtonLogoutIsDisplayed () {
+        profileButtonLogout.check(matches(isDisplayed()));
     }
 }

@@ -37,8 +37,8 @@ public class AuthScreen {
             isAssignableFrom(EditText.class),
             isDescendantOfA(withId(R.id.password_text_input_layout))));
     private static final ViewInteraction signInButton = onView(withId(R.id.enter_button));
-    private static final String loginPasswordCannotBeEmptyMsg = "Login and password cannot be empty";
-    private static final String wrongLoginPasswordMsg = "Something went wrong. Try again later.";
+    private static final int loginPasswordCannotBeEmptyMsg = R.string.empty_login_or_password;
+    private static final int wrongLoginPasswordMsg = R.string.error;
 
 
     public static void  waitUntilIsDisplayed () {

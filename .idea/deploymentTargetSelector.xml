@@ -14,10 +14,10 @@
       <SelectionState runConfigName="successfulLogout()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="loginWithEmptyLoginAndPassword()">
+      <SelectionState runConfigName="loginWithEmptyLogin()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="loginWithEmptyLogin()">
+      <SelectionState runConfigName="successfulNewsCreation()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>

@@ -20,6 +20,7 @@ import ru.iteco.fmhandroid.ui.AppActivity;
 import ru.iteco.fmhandroid.ui.screens.AuthScreen;
 import ru.iteco.fmhandroid.ui.steps.AuthScreenSteps;
 import ru.iteco.fmhandroid.ui.steps.MainScreenSteps;
+import ru.iteco.fmhandroid.ui.steps.NavigationBarSteps;
 import ru.iteco.fmhandroid.ui.utils.TestStartup;
 
 @LargeTest
@@ -29,6 +30,7 @@ public class LoginActivityTests {
     private View decorView;
     private final AuthScreenSteps authScreenSteps = new AuthScreenSteps();
     private final MainScreenSteps mainScreenSteps = new MainScreenSteps();
+    private final NavigationBarSteps navigationBarSteps = new NavigationBarSteps();
 
     @Rule
     public ActivityScenarioRule<AppActivity> activityRule =
@@ -48,6 +50,7 @@ public class LoginActivityTests {
     @AllureId("1")
     public void loginSuccessfulTest() {
         authScreenSteps.loginAsValidUser();
+        navigationBarSteps.assertIsDisplayed();
         mainScreenSteps.assertAllNewsLinkIsDisplayed();
     }
 
@@ -57,6 +60,7 @@ public class LoginActivityTests {
     public void loginWithEmptyLoginAndPassword() {
         authScreenSteps.loginWithEmptyLoginAndPassword();
         authScreenSteps.assertLoginPasswordCannotBeEmptyMsgIsDisplayed(decorView);
+        authScreenSteps.assertIsDisplayed();
     }
 
     @Test
@@ -65,6 +69,7 @@ public class LoginActivityTests {
     public void loginWithEmptyLogin() {
         authScreenSteps.loginWithEmptyLogin();
         authScreenSteps.assertLoginPasswordCannotBeEmptyMsgIsDisplayed(decorView);
+        authScreenSteps.assertIsDisplayed();
     }
 
     @Test
@@ -73,6 +78,7 @@ public class LoginActivityTests {
     public void loginWithEmptyPassword() {
         authScreenSteps.loginWithEmptyPassword();
         authScreenSteps.assertLoginPasswordCannotBeEmptyMsgIsDisplayed(decorView);
+        authScreenSteps.assertIsDisplayed();
     }
 
     @Test
@@ -81,6 +87,7 @@ public class LoginActivityTests {
     public void loginWithWrongLoginAndPassword() {
         authScreenSteps.loginWithWrongLoginAndPassword();
         authScreenSteps.assertWrongLoginPasswordMsgIsDisplayed(decorView);
+        authScreenSteps.assertIsDisplayed();
     }
 
 }

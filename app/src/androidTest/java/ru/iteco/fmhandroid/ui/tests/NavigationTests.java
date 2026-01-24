@@ -9,8 +9,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import io.qameta.allure.android.runners.AllureAndroidJUnit4;
+import io.qameta.allure.kotlin.AllureId;
+import io.qameta.allure.kotlin.junit4.DisplayName;
 import ru.iteco.fmhandroid.ui.AppActivity;
 import ru.iteco.fmhandroid.ui.steps.AboutScreenSteps;
+import ru.iteco.fmhandroid.ui.steps.AuthScreenSteps;
 import ru.iteco.fmhandroid.ui.steps.MainScreenSteps;
 import ru.iteco.fmhandroid.ui.steps.NavigationBarSteps;
 import ru.iteco.fmhandroid.ui.utils.TestStartup;
@@ -26,6 +29,7 @@ public class NavigationTests {
     private final MainScreenSteps mainScreenSteps = new MainScreenSteps();
     private final NavigationBarSteps navigationBarSteps = new NavigationBarSteps();
     private final AboutScreenSteps aboutScreenSteps = new AboutScreenSteps();
+    private final AuthScreenSteps authScreenSteps = new AuthScreenSteps();
 
     @Before
     public void setUp() {
@@ -33,15 +37,24 @@ public class NavigationTests {
     }
 
     @Test
+    @DisplayName("Переход с главного экрана на экран 'О нас'")
+    @AllureId("-")
     public void navigationFromMainToAboutScreen() {
+        navigationBarSteps.assertNavigationDrawerButtonIsDisplayed();
         navigationBarSteps.expandNavigationDrawer();
+        navigationBarSteps.assertAboutButtonIsDisplayed();
         navigationBarSteps.tapOnAboutButton();
         aboutScreenSteps.assertVersionLabelIsDisplayed();
     }
 
     @Test
+    @DisplayName("Выход из сессии")
+    @AllureId("6")
     public void successfulLogout() {
+        navigationBarSteps.assertProfileButtonIsDisplayed();
         navigationBarSteps.tapProfileButton();
+        navigationBarSteps.assertProfileButtonLogoutIsDisplayed();
         navigationBarSteps.tapLogoutButton();
+        authScreenSteps.assertIsDisplayed();
     }
 }

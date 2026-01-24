@@ -40,6 +40,10 @@ public class AuthScreenSteps {
         AuthScreen.loginWithWrongLoginAndPassword();
     }
 
+    public void assertIsDisplayed() {
+        Allure.step("Authorization screen is displayed");
+        AuthScreen.assertIsOnScreen();
+    }
 
     public void assertLoginPasswordCannotBeEmptyMsgIsDisplayed(View decorView) {
         Allure.step("Toast msg that login and/or password cannot be empty is displayed");
