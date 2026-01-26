@@ -34,6 +34,7 @@ public class NewsScreen {
     }
 
     public static void tapOnEditNewsButton() {
+        editNewsButton.check(matches(isDisplayed()));
         editNewsButton.perform(click());
     }
 

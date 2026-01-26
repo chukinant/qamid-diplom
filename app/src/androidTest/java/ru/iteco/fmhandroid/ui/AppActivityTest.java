@@ -1,9 +1,9 @@
 package ru.iteco.fmhandroid.ui;
 
 
-import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
@@ -12,14 +12,12 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withParent;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.anything;
 import static org.hamcrest.Matchers.is;
 
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 
-import androidx.test.espresso.DataInteraction;
 import androidx.test.espresso.ViewInteraction;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -75,28 +73,55 @@ public class AppActivityTest {
                         isDisplayed()));
         materialButton2.perform(click());
 
-        ViewInteraction materialAutoCompleteTextView = onView(
-                allOf(withId(R.id.news_item_category_text_auto_complete_text_view),
+        ViewInteraction textInputEditText = onView(
+                allOf(withId(R.id.news_item_publish_date_text_input_edit_text),
                         childAtPosition(
                                 childAtPosition(
-                                        withId(R.id.news_item_category_text_input_layout),
+                                        withId(R.id.news_item_create_date_text_input_layout),
                                         0),
-                                0),
+                                1),
                         isDisplayed()));
-        materialAutoCompleteTextView.perform(click());
+        textInputEditText.perform(click());
 
-        DataInteraction materialTextView2 = onData(anything())
-                .inAdapterView(childAtPosition(
-                        withClassName(is("android.widget.PopupWindow$PopupBackgroundView")),
-                        0))
-                .atPosition(0);
-        materialTextView2.perform(click());
+        ViewInteraction materialButton3 = onView(
+                allOf(withId(android.R.id.button1), withText("OK"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.widget.ScrollView")),
+                                        0),
+                                3)));
+        materialButton3.perform(scrollTo(), click());
 
         ViewInteraction editText = onView(
-                allOf(withId(R.id.news_item_category_text_auto_complete_text_view), withText("Объявление"),
-                        withParent(withParent(withId(R.id.news_item_category_text_input_layout))),
+                allOf(withId(R.id.news_item_publish_date_text_input_edit_text), withText("26.01.2026"),
+                        withParent(withParent(withId(R.id.news_item_create_date_text_input_layout))),
                         isDisplayed()));
-        editText.check(matches(withText("Объявление")));
+        editText.check(matches(withText("26.01.2026")));
+
+        ViewInteraction textInputEditText2 = onView(
+                allOf(withId(R.id.news_item_publish_time_text_input_edit_text),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.news_item_publish_time_text_input_layout),
+                                        0),
+                                1),
+                        isDisplayed()));
+        textInputEditText2.perform(click());
+
+        ViewInteraction materialButton4 = onView(
+                allOf(withId(android.R.id.button1), withText("OK"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.widget.ScrollView")),
+                                        0),
+                                3)));
+        materialButton4.perform(scrollTo(), click());
+
+        ViewInteraction editText2 = onView(
+                allOf(withId(R.id.news_item_publish_time_text_input_edit_text), withText("17:37"),
+                        withParent(withParent(withId(R.id.news_item_publish_time_text_input_layout))),
+                        isDisplayed()));
+        editText2.check(matches(withText("17:37")));
     }
 
     private static Matcher<View> childAtPosition(

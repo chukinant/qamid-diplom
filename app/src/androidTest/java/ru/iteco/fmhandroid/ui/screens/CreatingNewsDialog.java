@@ -7,7 +7,9 @@ import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.RootMatchers.isPlatformPopup;
 import static androidx.test.espresso.matcher.RootMatchers.withDecorView;
+import static androidx.test.espresso.matcher.ViewMatchers.isClickable;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.isEnabled;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
@@ -38,8 +40,17 @@ public class CreatingNewsDialog extends BaseNewsDialog {
 
     private CreatingNewsDialog() {}
 
-    public static void assertIsOnScreen() {
-//        Allure.step("Creating News dialog is displayed");
-        onView(allOf(withId(BaseNewsDialog.viewID), withText("kjkjkj")).check(matches(isDisplayed())));
+    private static final int title = R.string.creating;
+
+    public static void assertTitleIsDisplayed() {
+//        Allure.step("Creating News dialog title is displayed");
+        createEditNewsDialogTitle.check(matches(isDisplayed()));
+        createEditNewsDialogTitle.check(matches(withText(title)));
+    }
+
+    public static void assertActivityToggleBarIsDisabled() {
+//        Allure.step("News activity toggle bar is disabled");
+        toggleBar.check(matches(isDisplayed()));
+        toggleBar.check(matches(not(isEnabled())));
     }
 }

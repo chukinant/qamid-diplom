@@ -25,12 +25,13 @@ public class NewsControlPanel {
 
     private static final int viewID = R.id.edit_news_material_button;
     private static final ViewInteraction newsControlPanelLabel = onView(allOf(
-            withText("Control panel"),
+            withText(R.string.news_control_panel),
             withParent(withParent(IsInstanceOf.<View>instanceOf(LinearLayout.class)))
     )).check(matches(isDisplayed()));
-
     private static final ViewInteraction addNewsButton = onView(allOf(
-            withId(R.id.add_news_image_view), withContentDescription("Add news button")));
+            withId(R.id.add_news_image_view), withContentDescription(R.string.add_news_button)));
+    private static final ViewInteraction editNewsButton = onView(allOf(
+            withId(R.id.edit_news_item_image_view), withContentDescription(R.string.news_edit_button)));
     private static final ViewInteraction filterNewsButton = onView(
             withId(R.id.filter_news_material_button));
     private static final ViewInteraction sortNewsButton = onView(
@@ -41,6 +42,7 @@ public class NewsControlPanel {
     }
 
     public static void tapOnAddNewsButton() {
+        addNewsButton.check(matches(isDisplayed()));
         addNewsButton.perform(click());
     }
 //
