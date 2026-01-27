@@ -1,7 +1,5 @@
 package ru.iteco.fmhandroid.ui.testdata;
 
-import androidx.annotation.NonNull;
-
 public final class NewsCategories {
 
     private static final String[] CATEGORIES = {

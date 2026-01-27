@@ -23,7 +23,6 @@ import android.widget.EditText;
 
 import androidx.test.espresso.ViewInteraction;
 
-import io.qameta.allure.kotlin.Allure;
 import ru.iteco.fmhandroid.R;
 
 public class BaseNewsDialog {

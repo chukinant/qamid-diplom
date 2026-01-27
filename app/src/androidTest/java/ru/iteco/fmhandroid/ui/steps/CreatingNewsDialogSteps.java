@@ -1,23 +1,8 @@
 package ru.iteco.fmhandroid.ui.steps;
 
-import static androidx.test.espresso.Espresso.onData;
-import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.RootMatchers.withDecorView;
-import static androidx.test.espresso.matcher.ViewMatchers.isClickable;
-import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
-import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withText;
-import static org.hamcrest.CoreMatchers.not;
-import static org.hamcrest.Matchers.anything;
-import static org.hamcrest.Matchers.is;
-
-import android.view.View;
+import android.os.SystemClock;
 
 import io.qameta.allure.kotlin.Allure;
-import ru.iteco.fmhandroid.R;
 import ru.iteco.fmhandroid.ui.screens.CreatingNewsDialog;
 import ru.iteco.fmhandroid.ui.testdata.NewsItemInfo;
 
@@ -31,29 +16,42 @@ public class CreatingNewsDialogSteps extends BaseNewsDialogSteps {
         CreatingNewsDialog.assertActivityToggleBarIsDisabled();
     }
 
-    public void assertCategoryDateTime(NewsItemInfo info) {
-        Allure.step("Assert that news category, publication date and time are correct");
+    public void assertNewsCategoryDateAndTime(NewsItemInfo info) {
         assertCategory(info.getCategory());
         assertPublicationDate(info.getPublicationDate());
         assertPublicationTime(info.getPublicationTime());
     }
 
     public void createNews(NewsItemInfo info) {
-        Allure.step("Create news with valid data");
         tapOnCategoryField();
         tapOnCategoryItemOnTheList(info.getPosition());
         specifyNewsTitle(info.getTitle());
         tapOnDateField();
-        new DatePickerDialogSteps().tapOnOkButton();
+        int day = NewsInfoHelper.getDay(info.getPublicationDate());
+        int month = NewsInfoHelper.getMonth(info.getPublicationDate());
+        int year = NewsInfoHelper.getYear(info.getPublicationDate());
+        assignDate(day, month, year);
         tapOnTimeField();
-        assignTime(
-                NewsInfoHelper.getHour(info.getPublicationTime()),
-                NewsInfoHelper.getMinutes(info.getPublicationTime())
-        );
+        int hours = NewsInfoHelper.getHour(info.getPublicationTime());
+        int minutes = NewsInfoHelper.getMinutes(info.getPublicationTime());
+        assignTime(hours, minutes);
         addDescription(info.getDescription());
-        assertCategoryDateTime(info);
+        assertNewsCategoryDateAndTime(info);
         tapOnSaveButton();
     }
 
-
+    public void createNewsWithoutCategory(NewsItemInfo info) {
+        specifyNewsTitle(info.getTitle());
+        tapOnDateField();
+        int day = NewsInfoHelper.getDay(info.getPublicationDate());
+        int month = NewsInfoHelper.getMonth(info.getPublicationDate());
+        int year = NewsInfoHelper.getYear(info.getPublicationDate());
+        assignDate(day, month, year);
+        tapOnTimeField();
+        int hours = NewsInfoHelper.getHour(info.getPublicationTime());
+        int minutes = NewsInfoHelper.getMinutes(info.getPublicationTime());
+        assignTime(hours, minutes);
+        addDescription(info.getDescription());
+        tapOnSaveButton();
+    }
 }

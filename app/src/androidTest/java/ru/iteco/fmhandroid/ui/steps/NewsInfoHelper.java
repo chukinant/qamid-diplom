@@ -10,7 +10,8 @@ import ru.iteco.fmhandroid.ui.testdata.NewsItemInfo;
 
 public class NewsInfoHelper {
 
-    private NewsInfoHelper() {}
+    private NewsInfoHelper() {
+    }
 
     public static final class CategorySelection {
         private final String category;
@@ -40,6 +41,22 @@ public class NewsInfoHelper {
         return LocalDate.now().plusDays(daysToAdd).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
     }
 
+    public static int getDay(String date) {
+        return Integer.parseInt(date.substring(0, 2));
+    }
+
+    public static int getMonth(String date) {
+        return Integer.parseInt(date.substring(3, 5));
+    }
+
+    public static int getYear(String date) {
+        return Integer.parseInt(date.substring(6));
+    }
+
+    public static String currentDate() {
+        return LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+    }
+
     public static String generateTime(int hoursToAdd, int minutesToAdd) {
         return LocalTime.now().plusHours(hoursToAdd).plusMinutes(minutesToAdd).format(DateTimeFormatter.ofPattern("HH:mm"));
     }
@@ -56,10 +73,26 @@ public class NewsInfoHelper {
         CategorySelection categorySelected = getRandomCategory();
         String category = categorySelected.getCategory();
         int position = categorySelected.getPosition();
-        String title = category;
         String publicationDate = generateDate(0);
-        String publicationTime = generateTime(0,-1);
-        String description = "News of " + category + " category. Publishing " + publicationDate + " at " + publicationTime;
-        return new NewsItemInfo(category, position, title, publicationDate, publicationTime, description);
+        String publicationTime = generateTime(0, -1);
+        String title = category + ". Новость к публикации " + publicationDate + " в " + publicationTime;
+        String description = "News of '" + category + "' category. Publishing " + publicationDate + " at " + publicationTime;
+        String creationDate = currentDate();
+        String status = "ACTIVE";
+        return new NewsItemInfo(category, position, title, publicationDate, publicationTime, description, creationDate, status);
     }
+
+    public static NewsItemInfo getNewsInfoTodayDateFiveHoursAgo() {
+        CategorySelection categorySelected = getRandomCategory();
+        String category = categorySelected.getCategory();
+        int position = categorySelected.getPosition();
+        String publicationDate = generateDate(0);
+        String publicationTime = generateTime(-5, 0);
+        String title = category + ". Новость к публикации " + publicationDate + " в " + publicationTime;
+        String description = "News of '" + category + "' category. Publishing " + publicationDate + " at " + publicationTime;
+        String creationDate = currentDate();
+        String status = "ACTIVE";
+        return new NewsItemInfo(category, position, title, publicationDate, publicationTime, description, creationDate, status);
+    }
+
 }

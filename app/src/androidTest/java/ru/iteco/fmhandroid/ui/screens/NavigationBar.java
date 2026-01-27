@@ -2,8 +2,6 @@ package ru.iteco.fmhandroid.ui.screens;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
-import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
@@ -13,12 +11,12 @@ import static org.hamcrest.Matchers.allOf;
 
 import androidx.test.espresso.ViewInteraction;
 
-import io.qameta.allure.kotlin.Allure;
 import ru.iteco.fmhandroid.R;
 
 public class NavigationBar {
 
-    private NavigationBar() {}
+    private NavigationBar() {
+    }
 
     private static final int viewID = R.id.main_menu_image_button;
     private static final ViewInteraction hamburgerButton = onView(allOf(
@@ -44,16 +42,15 @@ public class NavigationBar {
     private static final ViewInteraction profileButtonLogout = onView(allOf(
             withId(android.R.id.title), withText(R.string.log_out)));
 
-    public static void logout () {
+    public static void logout() {
         profileButton.check(matches(isDisplayed()));
         profileButton.perform(click());
         profileButtonLogout.check(matches(isDisplayed()));
         profileButtonLogout.perform(click());
     }
 
-    public static boolean assertIsOnScreen() {
+    public static void assertIsOnScreen() {
         onView(withId(viewID)).check(matches(isDisplayed()));
-        return true;
     }
 
     public static void tapOnNavigationDrawer() {
@@ -84,31 +81,31 @@ public class NavigationBar {
         profileButtonLogout.perform(click());
     }
 
-    public static void assertHamburgerButtonIsDisplayed () {
+    public static void assertHamburgerButtonIsDisplayed() {
         hamburgerButton.check(matches(isDisplayed()));
     }
 
-    public static void assertOurMissionButtonIsDisplayed () {
+    public static void assertOurMissionButtonIsDisplayed() {
         ourMissionButton.check(matches(isDisplayed()));
     }
 
-    public static void assertProfileButtonIsDisplayed () {
+    public static void assertProfileButtonIsDisplayed() {
         profileButton.check(matches(isDisplayed()));
     }
 
-    public static void assertNavigationDrawerButtonMainIsDisplayed () {
+    public static void assertNavigationDrawerButtonMainIsDisplayed() {
         navigationDrawerButtonMain.check(matches(isDisplayed()));
     }
 
-    public static void assertNavigationDrawerButtonNewsIsDisplayed () {
+    public static void assertNavigationDrawerButtonNewsIsDisplayed() {
         navigationDrawerButtonNews.check(matches(isDisplayed()));
     }
 
-    public static void assertNavigationDrawerButtonAboutIsDisplayed () {
+    public static void assertNavigationDrawerButtonAboutIsDisplayed() {
         navigationDrawerButtonAbout.check(matches(isDisplayed()));
     }
 
-    public static void assertProfileButtonLogoutIsDisplayed () {
+    public static void assertProfileButtonLogoutIsDisplayed() {
         profileButtonLogout.check(matches(isDisplayed()));
     }
 }

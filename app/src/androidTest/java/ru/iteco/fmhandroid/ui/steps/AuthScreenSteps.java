@@ -3,9 +3,6 @@ package ru.iteco.fmhandroid.ui.steps;
 import android.view.View;
 
 import io.qameta.allure.kotlin.Allure;
-import io.qameta.allure.kotlin.AllureId;
-import io.qameta.allure.kotlin.Step;
-import io.qameta.allure.kotlin.junit4.DisplayName;
 import ru.iteco.fmhandroid.ui.screens.AuthScreen;
 
 public class AuthScreenSteps {
@@ -13,7 +10,7 @@ public class AuthScreenSteps {
 
     public void loginAsValidUser() {
         Allure.step("Login with valid credentials");
-            AuthScreen.loginAsValidUser();
+        AuthScreen.loginAsValidUser();
     }
 
 
@@ -30,7 +27,7 @@ public class AuthScreenSteps {
 
 
     public void loginWithEmptyLogin() {
-       Allure.step("Login with empty login");
+        Allure.step("Login with empty login");
         AuthScreen.loginWithEmptyLogin();
     }
 

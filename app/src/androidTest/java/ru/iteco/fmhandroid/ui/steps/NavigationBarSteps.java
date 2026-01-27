@@ -1,14 +1,6 @@
 package ru.iteco.fmhandroid.ui.steps;
 
-import static androidx.test.espresso.action.ViewActions.click;
-
-import org.junit.Before;
-import org.junit.Test;
-
 import io.qameta.allure.kotlin.Allure;
-import io.qameta.allure.kotlin.Step;
-import ru.iteco.fmhandroid.ui.screens.AuthScreen;
-import ru.iteco.fmhandroid.ui.screens.MainScreen;
 import ru.iteco.fmhandroid.ui.screens.NavigationBar;
 
 public class NavigationBarSteps {
@@ -46,6 +38,18 @@ public class NavigationBarSteps {
     public void tapOurMissionButton() {
         Allure.step("User taps on 'Our mission' button");
         NavigationBar.tapOnOurMissionButton();
+    }
+
+    public void goFromControlPanelToNewsScreen() {
+        Allure.step("Transfer is made from Control panel to News screen");
+        NavigationBar.tapOnNavigationDrawer();
+        NavigationBar.tapOnNewsButton();
+    }
+
+    public void goFromNewsScreenToMain() {
+        Allure.step("Transfer is made from News screen to Main screen");
+        NavigationBar.tapOnNavigationDrawer();
+        NavigationBar.tapOnMainButton();
     }
 
     public void assertIsDisplayed() {

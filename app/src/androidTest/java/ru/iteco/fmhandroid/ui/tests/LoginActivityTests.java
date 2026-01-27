@@ -1,13 +1,10 @@
 package ru.iteco.fmhandroid.ui.tests;
 
-import android.content.Context;
 import android.view.View;
 
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.filters.LargeTest;
-import androidx.test.platform.app.InstrumentationRegistry;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -17,7 +14,6 @@ import io.qameta.allure.android.runners.AllureAndroidJUnit4;
 import io.qameta.allure.kotlin.AllureId;
 import io.qameta.allure.kotlin.junit4.DisplayName;
 import ru.iteco.fmhandroid.ui.AppActivity;
-import ru.iteco.fmhandroid.ui.screens.AuthScreen;
 import ru.iteco.fmhandroid.ui.steps.AuthScreenSteps;
 import ru.iteco.fmhandroid.ui.steps.MainScreenSteps;
 import ru.iteco.fmhandroid.ui.steps.NavigationBarSteps;

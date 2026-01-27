@@ -21,7 +21,8 @@ import ru.iteco.fmhandroid.R;
 
 public class NewsControlPanel {
 
-    private NewsControlPanel() {}
+    private NewsControlPanel() {
+    }
 
     private static final int viewID = R.id.edit_news_material_button;
     private static final ViewInteraction newsControlPanelLabel = onView(allOf(
@@ -45,15 +46,17 @@ public class NewsControlPanel {
         addNewsButton.check(matches(isDisplayed()));
         addNewsButton.perform(click());
     }
-//
-//    public static void tapOnFilterNewsButton() {
-//        filterNewsButton.perform(click());
-//    }
-//
-//    public static void tapOnSortNewsButton() {
-//        sortNewsButton.perform(click());
-//    }
-//
+
+    public static void tapOnFilterNewsButton() {
+        filterNewsButton.check(matches(isDisplayed()));
+        filterNewsButton.perform(click());
+    }
+
+    public static void tapOnSortNewsButton() {
+        sortNewsButton.check(matches(isDisplayed()));
+        sortNewsButton.perform(click());
+    }
+
 //    public static void assertEditNewsButtonIsDisplayed () {
 //        editNewsButton.check(matches(isDisplayed()));
 //    }
@@ -65,8 +68,8 @@ public class NewsControlPanel {
 //    public static void assertSortNewsButtonIsDisplayed () {
 //        sortNewsButton.check(matches(isDisplayed()));
 //    }
-//
-    public static void assertNewsControlPanelLabelIsDisplayed () {
+
+    public static void assertNewsControlPanelLabelIsDisplayed() {
         newsControlPanelLabel.check(matches(isDisplayed()));
     }
 }

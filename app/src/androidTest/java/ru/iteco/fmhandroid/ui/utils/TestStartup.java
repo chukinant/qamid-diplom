@@ -9,23 +9,23 @@ public final class TestStartup {
     private TestStartup() {
     }
 
-        public static void ensureLoggedIn() {
-            try {
-                MainScreen.waitUntilIsDisplayed();
-            } catch (Throwable ignored) {
-                AuthScreen.loginAsValidUser();
-                MainScreen.waitUntilIsDisplayed();
-            }
+    public static void ensureLoggedIn() {
+        try {
+            MainScreen.waitUntilIsDisplayed();
+        } catch (Throwable ignored) {
+            AuthScreen.loginAsValidUser();
+            MainScreen.waitUntilIsDisplayed();
         }
+    }
 
-        public static void ensureNotLoggedIn() {
-            try {
-                AuthScreen.waitUntilIsDisplayed();
-            } catch (Throwable ignored) {
-                NavigationBar.logout();
-                AuthScreen.waitUntilIsDisplayed();
-            }
+    public static void ensureNotLoggedIn() {
+        try {
+            AuthScreen.waitUntilIsDisplayed();
+        } catch (Throwable ignored) {
+            NavigationBar.logout();
+            AuthScreen.waitUntilIsDisplayed();
         }
+    }
 }
 
 

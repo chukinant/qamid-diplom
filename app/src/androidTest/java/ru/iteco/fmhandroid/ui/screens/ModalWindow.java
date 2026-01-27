@@ -7,7 +7,6 @@ import static androidx.test.espresso.matcher.RootMatchers.isDialog;
 import static androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withParent;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 
@@ -15,12 +14,12 @@ import android.widget.ScrollView;
 
 import androidx.test.espresso.ViewInteraction;
 
-import io.qameta.allure.kotlin.Allure;
 import ru.iteco.fmhandroid.R;
 
 public class ModalWindow {
 
-    private ModalWindow() {};
+    private ModalWindow() {
+    }
 
     private static final ViewInteraction modalWindow = onView(isAssignableFrom(ScrollView.class));
     private static final ViewInteraction modalWindowMsg = onView(withId(android.R.id.message));

@@ -1,8 +1,5 @@
 package ru.iteco.fmhandroid.ui.tests;
 
-import static ru.iteco.fmhandroid.ui.steps.NewsInfoHelper.getNewsInfoTodayDateMinuteAgo;
-
-import android.os.SystemClock;
 import android.view.View;
 
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
@@ -53,33 +50,38 @@ public class CreatingNewsTests {
         TestStartup.ensureLoggedIn();
         mainScreen.tapOnAllNewsLink();
         newsScreen.assertNewsScreenLabelIsDisplayed();
+        newsScreen.tapOnEditNewsButton();
+        newsControlPanel.assertNewsControlPanelLabelIsDisplayed();
+        newsControlPanel.tapOnAddNewsButton();
+        creatingNewsDialog.assertCreatingNewsDialogIsDisplayed();
     }
 
     @Test
     @DisplayName("Успешное создание новости")
     @AllureId("10")
     public void successfulNewsCreation() {
-        NewsItemInfo newsItemInfo = getNewsInfoTodayDateMinuteAgo();
+        NewsItemInfo newsItemInfo = NewsInfoHelper.getNewsInfoTodayDateMinuteAgo();
+        creatingNewsDialog.createNews(newsItemInfo);
+        newsControlPanel.assertNewsCardInfo(newsItemInfo);
+        navigationBar.goFromControlPanelToNewsScreen();
+        newsScreen.assertNewsScreenLabelIsDisplayed();
+        newsScreen.assertNewsCardInfo(newsItemInfo);
+        navigationBar.goFromNewsScreenToMain();
+        mainScreen.assertAllNewsLinkIsDisplayed();
+        mainScreen.assertNewsCardInfo(newsItemInfo);
+    }
+
+    @Test
+    @DisplayName("Отображение всплывающего сообщения при попытке публикации без категории")
+    @AllureId("13")
+    public void fillEmptyFieldsMsgIfWithoutCategory() {
+        NewsItemInfo newsItemInfo = NewsInfoHelper.getNewsInfoTodayDateFiveHoursAgo();
         newsScreen.tapOnEditNewsButton();
         newsControlPanel.assertNewsControlPanelLabelIsDisplayed();
         newsControlPanel.tapOnAddNewsButton();
         creatingNewsDialog.assertCreatingNewsDialogIsDisplayed();
-        creatingNewsDialog.createNews(newsItemInfo);
-    }
-
-    @Test
-    @DisplayName("Отображение всплывающего сообщения при попытке публикации только с заполненной категорией новости")
-    @AllureId("-")
-    public void fillEmptyFieldsMsgWhenOnlyCategoryIsFilled() {
-        newsScreen.tapOnEditNewsButton();
-        newsControlPanel.assertNewsControlPanelLabelIsDisplayed();
-        newsControlPanel.tapOnAddNewsButton();
-        creatingNewsDialog.assertIsOnScreen();
-        creatingNewsDialog.tapOnCategoryField();
-        creatingNewsDialog.tapOnCategoryItemOnTheList(1);
-        creatingNewsDialog.tapOnSaveButton();
+        creatingNewsDialog.createNewsWithoutCategory(newsItemInfo);
         creatingNewsDialog.assertFillEmptyFieldsMsgIsDisplayed(decorView);
     }
-
 }
 

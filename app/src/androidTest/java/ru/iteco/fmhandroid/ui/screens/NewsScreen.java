@@ -4,7 +4,6 @@ import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withParent;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
@@ -15,7 +14,8 @@ import androidx.test.espresso.ViewInteraction;
 import ru.iteco.fmhandroid.R;
 
 public class NewsScreen {
-    private NewsScreen() {}
+    private NewsScreen() {
+    }
 
     private static final int viewID = R.id.edit_news_material_button;
     private static final ViewInteraction newsScreenLabel = onView(allOf(
@@ -46,19 +46,19 @@ public class NewsScreen {
         sortNewsButton.perform(click());
     }
 
-    public static void assertEditNewsButtonIsDisplayed () {
+    public static void assertEditNewsButtonIsDisplayed() {
         editNewsButton.check(matches(isDisplayed()));
     }
 
-    public static void assertFilterNewsButtonIsDisplayed () {
+    public static void assertFilterNewsButtonIsDisplayed() {
         filterNewsButton.check(matches(isDisplayed()));
     }
 
-    public static void assertSortNewsButtonIsDisplayed () {
+    public static void assertSortNewsButtonIsDisplayed() {
         sortNewsButton.check(matches(isDisplayed()));
     }
 
-    public static void assertNewsScreenLabelIsDisplayed () {
+    public static void assertNewsScreenLabelIsDisplayed() {
         newsScreenLabel.check(matches(isDisplayed()));
     }
 }

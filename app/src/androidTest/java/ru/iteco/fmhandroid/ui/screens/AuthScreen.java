@@ -12,7 +12,6 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
-
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.Matchers.allOf;
 import static ru.iteco.fmhandroid.ui.utils.ViewWaiterAndMatcher.waitUntilDisplayed;
@@ -27,7 +26,8 @@ import ru.iteco.fmhandroid.ui.testdata.TestUsers;
 
 public class AuthScreen {
 
-    private AuthScreen() {}
+    private AuthScreen() {
+    }
 
     private static final int viewID = R.id.password_text_input_layout;
     private static final ViewInteraction loginInputField = onView(allOf(
@@ -41,30 +41,30 @@ public class AuthScreen {
     private static final int wrongLoginPasswordMsg = R.string.error;
 
 
-    public static void  waitUntilIsDisplayed () {
+    public static void waitUntilIsDisplayed() {
         onView(isRoot()).perform(waitUntilDisplayed(viewID, 5000));
     }
 
-    public static boolean assertIsOnScreen() {
+    public static void assertIsOnScreen() {
+//        waitUntilIsDisplayed();
         onView(withId(viewID)).check(matches(isDisplayed()));
-        return true;
     }
 
     public static int getRootViewId() {
         return viewID;
     }
 
-    private static void enterLogin (String login) {
+    private static void enterLogin(String login) {
         loginInputField.check(matches(isDisplayed()));
         loginInputField.perform(replaceText(login), closeSoftKeyboard());
     }
 
-    private static void enterPassword (String password) {
+    private static void enterPassword(String password) {
         passwordInputField.check(matches(isDisplayed()));
         passwordInputField.perform(replaceText(password), closeSoftKeyboard());
     }
 
-    private static void submit () {
+    private static void submit() {
         signInButton.check(matches(isDisplayed()));
         signInButton.perform(click());
     }

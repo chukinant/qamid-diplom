@@ -7,19 +7,25 @@ public final class NewsItemInfo {
     private final String publicationDate;
     private final String publicationTime;
     private final String description;
+    private final String creationDate;
+    private final String status;
 
     public NewsItemInfo(String category,
                         int position,
                         String title,
                         String publicationDate,
                         String publicationTime,
-                        String description) {
+                        String description,
+                        String creationDate,
+                        String status) {
         this.category = category;
         this.position = position;
         this.title = title;
         this.publicationDate = publicationDate;
         this.publicationTime = publicationTime;
         this.description = description;
+        this.creationDate = creationDate;
+        this.status = status;
     }
 
     public String getCategory() {
@@ -44,5 +50,13 @@ public final class NewsItemInfo {
 
     public String getDescription() {
         return description;
+    }
+
+    public String getCreationDate() {
+        return creationDate;
+    }
+
+    public String getStatus() {
+        return status;
     }
 }

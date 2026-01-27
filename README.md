@@ -13,4 +13,4 @@
 6. Для запуска всех тестов в терминале запустить кастомную команду `./gradlew runTestsNoUninstall`. 
  Для запуска всех тестов из конкретного класса нужно запускать с флагом, например `./gradlew app:runTestsNoUninstall "-Pandroid.testInstrumentationRunnerArguments.class=ru.iteco.fmhandroid.ui.tests.LoginActivityTests"`
 7. Для получения отчета Allure запустить Device Explorer, в дереве найти папку /data/data/ru.iteco.fmhandroid/files/allure-results, затем правой кнопкой мыши нажать на папку files, выбрать "Save As", далее сохранить в ./app/build/
-После этого выполнить `allure serve ./build/` для генерации отчета.
+После этого перейти в ./app/build и выполнить `allure serve` для генерации отчета и его просмотра.

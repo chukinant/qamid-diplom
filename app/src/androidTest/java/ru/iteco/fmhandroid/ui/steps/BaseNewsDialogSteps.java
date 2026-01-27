@@ -1,18 +1,10 @@
 package ru.iteco.fmhandroid.ui.steps;
 
-import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
-import static androidx.test.espresso.action.ViewActions.replaceText;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.withText;
-
 import android.view.View;
 
 import io.qameta.allure.kotlin.Allure;
 import ru.iteco.fmhandroid.R;
 import ru.iteco.fmhandroid.ui.screens.BaseNewsDialog;
-import ru.iteco.fmhandroid.ui.testdata.NewsItemInfo;
 
 public abstract class BaseNewsDialogSteps {
 
@@ -36,7 +28,7 @@ public abstract class BaseNewsDialogSteps {
     }
 
     public void tapOnCategoryItemOnTheList(int pos) {
-        Allure.step("User taps on the {pos}th item on the dropdown list");
+        Allure.step("User taps on the " + (pos + 1) + "th item on the dropdown list");
         BaseNewsDialog.tapOnCategoryItemOnTheList(pos);
     }
 
@@ -50,9 +42,9 @@ public abstract class BaseNewsDialogSteps {
         BaseNewsDialog.tapOnDateField();
     }
 
-    public void assignDate(int daysAhead) {
-        Allure.step("User assigns date of " + daysAhead + " days ahead");
-        datePickerDialog.assignDate(daysAhead);
+    public void assignDate(int day, int month, int year) {
+//        Allure.step("User assigns date of " + daysAhead + " days ahead");
+        datePickerDialog.assignDate(day, month, year);
     }
 
     public void assignTime(int hour, int minute) {
@@ -81,17 +73,17 @@ public abstract class BaseNewsDialogSteps {
     }
 
     public static void assertCategory(String category) {
-      Allure.step("Assert chosen category");
+        Allure.step("Assert chosen category");
         BaseNewsDialog.assertCategory(category);
     }
 
     public void assertPublicationDate(String date) {
-      Allure.step("Publication date field is filled with the chosen date");
+        Allure.step("Publication date field is filled with the chosen date");
         BaseNewsDialog.assertPublicationDate(date);
     }
 
     public void assertPublicationTime(String time) {
-      Allure.step("Publication date field is filled with the chosen date");
+        Allure.step("Publication date field is filled with the chosen date");
         BaseNewsDialog.assertPublicationTime(time);
     }
 
