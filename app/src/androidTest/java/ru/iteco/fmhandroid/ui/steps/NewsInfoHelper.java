@@ -13,6 +13,8 @@ public class NewsInfoHelper {
     private NewsInfoHelper() {
     }
 
+    private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+
     public static final class CategorySelection {
         private final String category;
         private final int position;
@@ -37,8 +39,18 @@ public class NewsInfoHelper {
         return new CategorySelection(categories[position], position);
     }
 
+    public static CategorySelection getAnotherCategory(String category) {
+        String[] categories = NewsCategories.getCategories();
+        Random random = new Random();
+        int position;
+        do {
+            position = random.nextInt(categories.length);
+        } while (categories[position].equals(category));
+        return new CategorySelection(categories[position], position);
+    }
+
     public static String generateDate(int daysToAdd) {
-        return LocalDate.now().plusDays(daysToAdd).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        return LocalDate.now().plusDays(daysToAdd).format(dateTimeFormatter);
     }
 
     public static int getDay(String date) {
@@ -95,4 +107,88 @@ public class NewsInfoHelper {
         return new NewsItemInfo(category, position, title, publicationDate, publicationTime, description, creationDate, status);
     }
 
+    public static NewsItemInfo getNewsInfoTomorrowDate() {
+        CategorySelection categorySelected = getRandomCategory();
+        String category = categorySelected.getCategory();
+        int position = categorySelected.getPosition();
+        String publicationDate = generateDate(1);
+        String publicationTime = generateTime(0, 0);
+        String title = category + ". Новость к публикации " + publicationDate + " в " + publicationTime;
+        String description = "News of '" + category + "' category. Publishing " + publicationDate + " at " + publicationTime;
+        String creationDate = currentDate();
+        String status = "ACTIVE";
+        return new NewsItemInfo(category, position, title, publicationDate, publicationTime, description, creationDate, status);
+    }
+
+    public static NewsItemInfo getNewsInfoWithAnotherCategory(NewsItemInfo initialInfo) {
+        NewsInfoHelper.CategorySelection categorySelected = getAnotherCategory(initialInfo.getCategory());
+        String category = categorySelected.getCategory();
+        int position = categorySelected.getPosition();
+        return new NewsItemInfo (
+                category,
+                position,
+                initialInfo.getTitle(),
+                initialInfo.getPublicationDate(),
+                initialInfo.getPublicationTime(),
+                initialInfo.getDescription(),
+                initialInfo.getCreationDate(),
+                initialInfo.getStatus());
+    }
+
+    public static NewsItemInfo getNewsInfoWithEditedTitle(NewsItemInfo initialInfo) {
+        String editedTitle = initialInfo.getTitle() + ". Edited";
+        return new NewsItemInfo (
+                initialInfo.getCategory(),
+                initialInfo.getPosition(),
+                editedTitle,
+                initialInfo.getPublicationDate(),
+                initialInfo.getPublicationTime(),
+                initialInfo.getDescription(),
+                initialInfo.getCreationDate(),
+                initialInfo.getStatus());
+    }
+
+    public static NewsItemInfo getNewsInfoWithEditedPubDate(NewsItemInfo initialInfo) {
+        String initialDate = initialInfo.getPublicationDate();
+        LocalDate date = LocalDate.parse(initialDate, dateTimeFormatter);
+        String editedDate = date.plusDays(1).format(dateTimeFormatter);
+        return new NewsItemInfo (
+                initialInfo.getCategory(),
+                initialInfo.getPosition(),
+                initialInfo.getTitle(),
+                editedDate,
+                initialInfo.getPublicationTime(),
+                initialInfo.getDescription(),
+                initialInfo.getCreationDate(),
+                initialInfo.getStatus());
+    }
+
+    public static NewsItemInfo getNewsInfoWithEditedDescription(NewsItemInfo initialInfo) {
+        String editedDescription = initialInfo.getDescription() + ". Edited";
+        return new NewsItemInfo (
+                initialInfo.getCategory(),
+                initialInfo.getPosition(),
+                initialInfo.getTitle(),
+                initialInfo.getPublicationDate(),
+                initialInfo.getPublicationTime(),
+                editedDescription,
+                initialInfo.getCreationDate(),
+                initialInfo.getStatus());
+    }
+
+    public static NewsItemInfo getNewsInfoWithChangedStatus(NewsItemInfo initialInfo) {
+        String changedStatus;
+        if (initialInfo.getStatus().equals("ACTIVE")) {
+        changedStatus = "NOT ACTIVE";}
+        else {changedStatus = "ACTIVE";}
+        return new NewsItemInfo (
+                initialInfo.getCategory(),
+                initialInfo.getPosition(),
+                initialInfo.getTitle(),
+                initialInfo.getPublicationDate(),
+                initialInfo.getPublicationTime(),
+                initialInfo.getDescription(),
+                initialInfo.getCreationDate(),
+                changedStatus);
+    }
 }

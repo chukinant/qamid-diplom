@@ -11,6 +11,7 @@ import static androidx.test.espresso.matcher.RootMatchers.withDecorView;
 import static androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom;
 import static androidx.test.espresso.matcher.ViewMatchers.isDescendantOfA;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withParent;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
@@ -19,11 +20,20 @@ import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.anything;
 
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.EditText;
 
+import androidx.test.espresso.DataInteraction;
+import androidx.test.espresso.NoMatchingViewException;
 import androidx.test.espresso.ViewInteraction;
 
+import org.hamcrest.Description;
+import org.hamcrest.Matcher;
+import org.hamcrest.TypeSafeMatcher;
+
 import ru.iteco.fmhandroid.R;
+import ru.iteco.fmhandroid.ui.testdata.NewsCategories;
 
 public class BaseNewsDialog {
 
@@ -72,10 +82,16 @@ public class BaseNewsDialog {
 
     public static void tapOnCategoryItemOnTheList(int position) {
 //        Allure.step("User taps on the Nth item on the dropdown list");
-        onData(anything())
-                .inRoot(isPlatformPopup())
-                .atPosition(position)
-                .perform(click());
+//        DataInteraction interaction = onData(anything())
+//                .inRoot(isPlatformPopup())
+//                .atPosition(position);
+//        interaction.perform(click());
+        try {
+            onData(anything()).inRoot(isPlatformPopup()).
+                    atPosition(position).perform(click());
+        } catch (NoMatchingViewException e) {
+            clickPopupItemByPosition(position);
+        }
         categoryField.perform(closeSoftKeyboard());
     }
 
@@ -140,5 +156,42 @@ public class BaseNewsDialog {
         onView(withText(fillEmptyFieldsMsg))
                 .inRoot(withDecorView(not(decorView)))
                 .check(matches(isDisplayed()));
+    }
+
+    public static Matcher<View> childAtPosition(
+            final Matcher<View> parentMatcher,
+            final int position
+    ) {
+        return new TypeSafeMatcher<View>() {
+
+            @Override
+            public void describeTo(Description description) {
+                description.appendText("Child at position " + position + " in parent ");
+                parentMatcher.describeTo(description);
+            }
+
+            @Override
+            protected boolean matchesSafely(View view) {
+                ViewParent parent = view.getParent();
+                if (!(parent instanceof ViewGroup)) {
+                    return false;
+                }
+                ViewGroup group = (ViewGroup) parent;
+                return parentMatcher.matches(parent)
+                        && group.getChildAt(position) == view;
+            }
+        };
+    }
+
+    public static void clickPopupItemByPosition(int position) {
+        onView(
+                childAtPosition(
+                        isRoot(),
+                        position
+                )
+        )
+                .inRoot(isPlatformPopup())
+                .check(matches(isDisplayed()))
+                .perform(click());
     }
 }

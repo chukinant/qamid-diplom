@@ -13,7 +13,7 @@ import static org.hamcrest.CoreMatchers.allOf;
 import android.content.res.Resources;
 import android.widget.ImageButton;
 
-public class TimePickerDialogSteps {
+public class TimePickerDialogSteps extends BaseModalWindowSteps {
 
     public void assignTime(int hour, int minute) {
         onView(allOf(
@@ -36,8 +36,6 @@ public class TimePickerDialogSteps {
 
         closeSoftKeyboard();
 
-        onView(withId(android.R.id.button1))
-                .inRoot(isDialog())
-                .perform(click());
+        tapOnOkButton();
     }
 }

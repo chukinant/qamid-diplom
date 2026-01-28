@@ -8,9 +8,11 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
+import static org.junit.Assert.assertFalse;
 
 import android.view.View;
 
+import androidx.test.espresso.PerformException;
 import androidx.test.espresso.contrib.RecyclerViewActions;
 
 import org.hamcrest.Matcher;
@@ -60,5 +62,16 @@ public class BaseNewsCard {
                         withId(R.id.news_item_description_text_view),
                         withText(info.getDescription()),
                         isDisplayed()))));
+    }
+
+    public static void assertNotOnTheList(String title) {
+        boolean found = true;
+        try {
+            onView(withId(R.id.news_list_recycler_view))
+                    .perform(RecyclerViewActions.scrollTo(cardWithTitle(title)));
+        } catch (PerformException e) {
+            found = false;
+        }
+        assertFalse("News card should not exist: " + title, found);
     }
 }

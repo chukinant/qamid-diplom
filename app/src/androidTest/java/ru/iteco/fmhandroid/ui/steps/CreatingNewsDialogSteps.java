@@ -22,7 +22,7 @@ public class CreatingNewsDialogSteps extends BaseNewsDialogSteps {
         assertPublicationTime(info.getPublicationTime());
     }
 
-    public void createNews(NewsItemInfo info) {
+    public void fillForm(NewsItemInfo info) {
         tapOnCategoryField();
         tapOnCategoryItemOnTheList(info.getPosition());
         specifyNewsTitle(info.getTitle());
@@ -36,8 +36,6 @@ public class CreatingNewsDialogSteps extends BaseNewsDialogSteps {
         int minutes = NewsInfoHelper.getMinutes(info.getPublicationTime());
         assignTime(hours, minutes);
         addDescription(info.getDescription());
-        assertNewsCategoryDateAndTime(info);
-        tapOnSaveButton();
     }
 
     public void createNewsWithoutCategory(NewsItemInfo info) {

@@ -5,19 +5,19 @@
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="successfulNewsCreation()">
+      <SelectionState runConfigName="editNewsCategory()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="fillEmptyFieldsMsgWhenOnlyCategoryIsFilled()">
+      <SelectionState runConfigName="editNewsTitle()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="loginWithEmptyLoginAndPassword()">
+      <SelectionState runConfigName="editNewsPublicationDate()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="fillEmptyFieldsMsgIfWithoutCategory()">
+      <SelectionState runConfigName="editNewsDescription()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="successfulLogout()">
+      <SelectionState runConfigName="editNewsActivityStatus()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>

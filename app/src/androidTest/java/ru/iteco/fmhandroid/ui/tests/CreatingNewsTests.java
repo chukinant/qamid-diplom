@@ -14,10 +14,10 @@ import io.qameta.allure.android.runners.AllureAndroidJUnit4;
 import io.qameta.allure.kotlin.AllureId;
 import io.qameta.allure.kotlin.junit4.DisplayName;
 import ru.iteco.fmhandroid.ui.AppActivity;
+import ru.iteco.fmhandroid.ui.steps.CreateEditNewsModalSteps;
 import ru.iteco.fmhandroid.ui.steps.CreatingNewsDialogSteps;
-import ru.iteco.fmhandroid.ui.steps.DatePickerDialogSteps;
+import ru.iteco.fmhandroid.ui.steps.EditingNewsDialogSteps;
 import ru.iteco.fmhandroid.ui.steps.MainScreenSteps;
-import ru.iteco.fmhandroid.ui.steps.ModalWindowSteps;
 import ru.iteco.fmhandroid.ui.steps.NavigationBarSteps;
 import ru.iteco.fmhandroid.ui.steps.NewsControlPanelSteps;
 import ru.iteco.fmhandroid.ui.steps.NewsInfoHelper;
@@ -39,8 +39,8 @@ public class CreatingNewsTests {
     private final NewsControlPanelSteps newsControlPanel = new NewsControlPanelSteps();
     private final NavigationBarSteps navigationBar = new NavigationBarSteps();
     private final CreatingNewsDialogSteps creatingNewsDialog = new CreatingNewsDialogSteps();
-    private final DatePickerDialogSteps datePickerDialog = new DatePickerDialogSteps();
-    private final ModalWindowSteps modalWindow = new ModalWindowSteps();
+    private final CreateEditNewsModalSteps modalWindow = new CreateEditNewsModalSteps();
+
 
     @Before
     public void setUp() {
@@ -50,18 +50,19 @@ public class CreatingNewsTests {
         TestStartup.ensureLoggedIn();
         mainScreen.tapOnAllNewsLink();
         newsScreen.assertNewsScreenLabelIsDisplayed();
-        newsScreen.tapOnEditNewsButton();
+        newsScreen.tapOnPanelEditButton();
         newsControlPanel.assertNewsControlPanelLabelIsDisplayed();
         newsControlPanel.tapOnAddNewsButton();
         creatingNewsDialog.assertCreatingNewsDialogIsDisplayed();
     }
 
     @Test
-    @DisplayName("Успешное создание новости")
+    @DisplayName("Успешное создание и публикация новости")
     @AllureId("10")
-    public void successfulNewsCreation() {
+    public void successfulNewsCreationAndPublishing() {
         NewsItemInfo newsItemInfo = NewsInfoHelper.getNewsInfoTodayDateMinuteAgo();
-        creatingNewsDialog.createNews(newsItemInfo);
+        creatingNewsDialog.fillForm(newsItemInfo);
+        creatingNewsDialog.tapOnSaveButton();
         newsControlPanel.assertNewsCardInfo(newsItemInfo);
         navigationBar.goFromControlPanelToNewsScreen();
         newsScreen.assertNewsScreenLabelIsDisplayed();
@@ -72,16 +73,41 @@ public class CreatingNewsTests {
     }
 
     @Test
-    @DisplayName("Отображение всплывающего сообщения при попытке публикации без категории")
+    @DisplayName("Создание новости с будущей датой публикации")
+    @AllureId("11")
+    public void successfulNewsCreationNotPublished() {
+        NewsItemInfo newsItemInfo = NewsInfoHelper.getNewsInfoTomorrowDate();
+        creatingNewsDialog.fillForm(newsItemInfo);
+        creatingNewsDialog.tapOnSaveButton();
+        newsControlPanel.assertNewsCardInfo(newsItemInfo);
+        navigationBar.goFromControlPanelToNewsScreen();
+        newsScreen.assertNewsScreenLabelIsDisplayed();
+        newsScreen.assertCardIsNotOnTheList(newsItemInfo);
+        navigationBar.goFromNewsScreenToMain();
+        mainScreen.assertAllNewsLinkIsDisplayed();
+        mainScreen.assertCardIsNotOnTheList(newsItemInfo);
+    }
+
+    @Test
+    @DisplayName("Публикация новости без категории")
     @AllureId("13")
     public void fillEmptyFieldsMsgIfWithoutCategory() {
-        NewsItemInfo newsItemInfo = NewsInfoHelper.getNewsInfoTodayDateFiveHoursAgo();
-        newsScreen.tapOnEditNewsButton();
-        newsControlPanel.assertNewsControlPanelLabelIsDisplayed();
-        newsControlPanel.tapOnAddNewsButton();
-        creatingNewsDialog.assertCreatingNewsDialogIsDisplayed();
+        NewsItemInfo newsItemInfo = NewsInfoHelper.getNewsInfoTodayDateMinuteAgo();
         creatingNewsDialog.createNewsWithoutCategory(newsItemInfo);
         creatingNewsDialog.assertFillEmptyFieldsMsgIsDisplayed(decorView);
+    }
+
+    @Test
+    @DisplayName("Отмена создания новости")
+    @AllureId("18")
+    public void cancelNewsCreation() {
+        NewsItemInfo newsItemInfo = NewsInfoHelper.getNewsInfoTodayDateMinuteAgo();
+        creatingNewsDialog.fillForm(newsItemInfo);
+        creatingNewsDialog.tapOnCancelButton();
+        modalWindow.assertModalWindowIsDisplayed();
+        modalWindow.assertCancellationMsgIsDisplayed();
+        modalWindow.tapOnOkButton();
+        newsControlPanel.assertCardIsNotOnTheList(newsItemInfo);
     }
 }
 

@@ -16,10 +16,10 @@ import androidx.test.espresso.ViewInteraction;
 
 import ru.iteco.fmhandroid.R;
 
-public class ModalWindow {
+public class BaseModalWindow {
 
-    private ModalWindow() {
-    }
+//    private BaseModalWindow() {
+//    }
 
     private static final ViewInteraction modalWindow = onView(isAssignableFrom(ScrollView.class));
     private static final ViewInteraction modalWindowMsg = onView(withId(android.R.id.message));
@@ -27,7 +27,7 @@ public class ModalWindow {
             withText(R.string.fragment_positive_button)))
             .inRoot(isDialog());
     private static final ViewInteraction modalCancelButton = onView(
-            allOf(withId(android.R.id.button1), withText(R.string.cancel)))
+            allOf(withId(android.R.id.button2), withText(R.string.cancel)))
             .inRoot(isDialog());
 
     public static void tapOnOkButton() {

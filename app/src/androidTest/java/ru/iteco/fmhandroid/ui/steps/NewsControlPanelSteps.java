@@ -12,25 +12,35 @@ public class NewsControlPanelSteps {
         NewsControlPanel.tapOnAddNewsButton();
     }
 
+    public void tapOnEditNewsCardButton(NewsItemInfo info) {
+        Allure.step("User taps on Edit news card button");
+        ControlPanelNewsCard.tapOnEditButton(info);
+    }
+
     public void assertNewsControlPanelLabelIsDisplayed() {
         Allure.step("News control panel label is displayed");
         NewsControlPanel.assertNewsControlPanelLabelIsDisplayed();
     }
 
     public void assertNewsCardInfo(NewsItemInfo info) {
-        Allure.step("Scroll to created news card");
+        Allure.step("Scroll to news card");
         ControlPanelNewsCard.scrollTo(info.getTitle());
-        Allure.step("Assert created news card title");
+        Allure.step("Assert news card title");
         ControlPanelNewsCard.assertTitle(info);
-        Allure.step("Assert created news card publication date");
+        Allure.step("Assert news card publication date");
         ControlPanelNewsCard.assertPublicationDate(info);
-//        Allure.step("Assert created news card creation date");
+//        Allure.step("Assert news card creation date");
 //        ControlPanelNewsCard.assertCreationDate(info);
-        Allure.step("Assert created news card status");
+        Allure.step("Assert news card status");
         ControlPanelNewsCard.assertStatus(info);
-        Allure.step("Assert created news card description");
+        Allure.step("Assert news card description");
         ControlPanelNewsCard.expand(info.getTitle());
         ControlPanelNewsCard.scrollExpandedIntoView(info.getTitle());
         ControlPanelNewsCard.assertDescription(info);
+    }
+
+    public void assertCardIsNotOnTheList(NewsItemInfo info) {
+        Allure.step("Assert card is not on the list");
+        ControlPanelNewsCard.assertNotOnTheList(info.getTitle());
     }
 }

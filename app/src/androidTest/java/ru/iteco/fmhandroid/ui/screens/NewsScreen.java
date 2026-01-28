@@ -22,7 +22,7 @@ public class NewsScreen {
             withText(R.string.news),
             withParent(withParent(withId(R.id.container_list_news_include)))
     ));
-    private static final ViewInteraction editNewsButton = onView(
+    private static final ViewInteraction panelEditButton = onView(
             withId(R.id.edit_news_material_button));
     private static final ViewInteraction filterNewsButton = onView(
             withId(R.id.filter_news_material_button));
@@ -33,9 +33,9 @@ public class NewsScreen {
         onView(withId(viewID)).check(matches(isDisplayed()));
     }
 
-    public static void tapOnEditNewsButton() {
-        editNewsButton.check(matches(isDisplayed()));
-        editNewsButton.perform(click());
+    public static void tapOnPanelEditButton() {
+        panelEditButton.check(matches(isDisplayed()));
+        panelEditButton.perform(click());
     }
 
     public static void tapOnFilterNewsButton() {
@@ -47,7 +47,7 @@ public class NewsScreen {
     }
 
     public static void assertEditNewsButtonIsDisplayed() {
-        editNewsButton.check(matches(isDisplayed()));
+        panelEditButton.check(matches(isDisplayed()));
     }
 
     public static void assertFilterNewsButtonIsDisplayed() {

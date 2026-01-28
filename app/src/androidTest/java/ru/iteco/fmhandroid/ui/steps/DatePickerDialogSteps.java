@@ -8,7 +8,7 @@ import android.widget.DatePicker;
 
 import androidx.test.espresso.contrib.PickerActions;
 
-public class DatePickerDialogSteps extends ModalWindowSteps {
+public class DatePickerDialogSteps extends BaseModalWindowSteps {
 
     public void assignDate(int day, int month, int year) {
         onView(isAssignableFrom(DatePicker.class))
