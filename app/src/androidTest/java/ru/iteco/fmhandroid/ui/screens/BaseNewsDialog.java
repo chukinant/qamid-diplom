@@ -32,6 +32,7 @@ import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
+import io.qameta.allure.kotlin.Allure;
 import ru.iteco.fmhandroid.R;
 import ru.iteco.fmhandroid.ui.testdata.NewsCategories;
 
@@ -81,17 +82,17 @@ public class BaseNewsDialog {
     }
 
     public static void tapOnCategoryItemOnTheList(int position) {
-//        Allure.step("User taps on the Nth item on the dropdown list");
-//        DataInteraction interaction = onData(anything())
-//                .inRoot(isPlatformPopup())
-//                .atPosition(position);
-//        interaction.perform(click());
-        try {
-            onData(anything()).inRoot(isPlatformPopup()).
-                    atPosition(position).perform(click());
-        } catch (NoMatchingViewException e) {
-            clickPopupItemByPosition(position);
-        }
+        Allure.step("User taps on the Nth item on the dropdown list");
+        DataInteraction interaction = onData(anything())
+                .inRoot(isPlatformPopup())
+                .atPosition(position);
+        interaction.perform(click());
+//        try {
+//            onData(anything()).inRoot(isPlatformPopup()).
+//                    atPosition(position).perform(click());
+//        } catch (NoMatchingViewException e) {
+//            clickPopupItemByPosition(position);
+//        }
         categoryField.perform(closeSoftKeyboard());
     }
 
