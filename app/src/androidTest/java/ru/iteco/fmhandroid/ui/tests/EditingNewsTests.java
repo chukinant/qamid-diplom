@@ -1,6 +1,5 @@
 package ru.iteco.fmhandroid.ui.tests;
 
-import android.os.SystemClock;
 import android.view.View;
 
 import androidx.test.ext.junit.rules.ActivityScenarioRule;

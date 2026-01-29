@@ -19,13 +19,14 @@ import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.anything;
 
+import static ru.iteco.fmhandroid.ui.utils.ViewWaiterAndMatcher.waitUntilDisplayed;
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.widget.EditText;
 
 import androidx.test.espresso.DataInteraction;
-import androidx.test.espresso.NoMatchingViewException;
 import androidx.test.espresso.ViewInteraction;
 
 import org.hamcrest.Description;
@@ -34,11 +35,10 @@ import org.hamcrest.TypeSafeMatcher;
 
 import io.qameta.allure.kotlin.Allure;
 import ru.iteco.fmhandroid.R;
-import ru.iteco.fmhandroid.ui.testdata.NewsCategories;
 
 public class BaseNewsDialog {
 
-    protected static final int viewID = R.id.container_custom_app_bar_include_on_fragment_create_edit_news;
+    protected static final int waitingForID = R.id.container_custom_app_bar_include_on_fragment_create_edit_news;
     protected static ViewInteraction createEditNewsDialogTitle = onView(allOf(withId(R.id.custom_app_bar_title_text_view),
             withParent(withId(R.id.container_custom_app_bar_include_on_fragment_create_edit_news))));
     protected static ViewInteraction categoryField = onView(withId(R.id.news_item_category_text_auto_complete_text_view));
@@ -63,7 +63,7 @@ public class BaseNewsDialog {
 
     public static void assertIsOnScreen() {
 //        Allure.step("Creating/Editing News dialog is displayed");
-        onView(withId(BaseNewsDialog.viewID)).check(matches(isDisplayed()));
+        onView(isRoot()).perform(waitUntilDisplayed(waitingForID, 5000));
     }
 
     public static void assertFieldsAreDisplayed() {
@@ -82,7 +82,7 @@ public class BaseNewsDialog {
     }
 
     public static void tapOnCategoryItemOnTheList(int position) {
-        Allure.step("User taps on the Nth item on the dropdown list");
+//        Allure.step("User taps on the " + position + "th item on the dropdown list");
         DataInteraction interaction = onData(anything())
                 .inRoot(isPlatformPopup())
                 .atPosition(position);

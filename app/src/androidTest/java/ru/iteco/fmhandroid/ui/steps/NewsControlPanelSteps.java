@@ -1,5 +1,9 @@
 package ru.iteco.fmhandroid.ui.steps;
 
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+
 import io.qameta.allure.kotlin.Allure;
 import ru.iteco.fmhandroid.ui.screens.ControlPanelNewsCard;
 import ru.iteco.fmhandroid.ui.screens.NewsControlPanel;
@@ -15,6 +19,26 @@ public class NewsControlPanelSteps {
     public void tapOnEditNewsCardButton(NewsItemInfo info) {
         Allure.step("User taps on Edit news card button");
         ControlPanelNewsCard.tapOnEditButton(info);
+    }
+
+    public static void tapOnFilterNewsButton() {
+        Allure.step("User taps on Filter News Button");
+        NewsControlPanel.tapOnFilterNewsButton();
+    }
+
+    public static void tapOnSortNewsButton() {
+        Allure.step("User taps on Sort News Button");
+        NewsControlPanel.tapOnSortNewsButton();
+    }
+
+    public static void assertFilterNewsButtonIsDisplayed () {
+        Allure.step("Filter News Button is displayed");
+        NewsControlPanel.assertFilterNewsButtonIsDisplayed();
+    }
+
+    public static void assertSortNewsButtonIsDisplayed () {
+        Allure.step("Sort News Button is displayed");
+        NewsControlPanel.assertSortNewsButtonIsDisplayed();
     }
 
     public void assertNewsControlPanelLabelIsDisplayed() {

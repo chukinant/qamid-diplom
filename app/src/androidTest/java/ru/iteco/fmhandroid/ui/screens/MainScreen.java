@@ -18,20 +18,16 @@ public class MainScreen {
     private MainScreen() {
     }
 
-    private static final int viewID = R.id.container_list_news_include_on_fragment_main;
+    private static final int waitingForID = R.id.container_list_news_include_on_fragment_main;
     private static final ViewInteraction allNewsLink = onView(withId(R.id.all_news_text_view));
     private static final int allNewsLinkText = R.string.all_news;
 
     public static void waitUntilIsDisplayed() {
-        onView(isRoot()).perform(waitUntilDisplayed(viewID, 5000));
+        onView(isRoot()).perform(waitUntilDisplayed(waitingForID, 5000));
     }
 
     public static void assertIsOnScreen() {
-        onView(withId(viewID)).check(matches(isDisplayed()));
-    }
-
-    public static int getRootViewId() {
-        return viewID;
+        onView(withId(waitingForID)).check(matches(isDisplayed()));
     }
 
     public static void tapOnAllNewsLink() {

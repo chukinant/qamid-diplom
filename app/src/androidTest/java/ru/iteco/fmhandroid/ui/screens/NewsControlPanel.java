@@ -31,8 +31,6 @@ public class NewsControlPanel {
     )).check(matches(isDisplayed()));
     private static final ViewInteraction addNewsButton = onView(allOf(
             withId(R.id.add_news_image_view), withContentDescription(R.string.add_news_button)));
-    private static final ViewInteraction editNewsButton = onView(allOf(
-            withId(R.id.edit_news_item_image_view), withContentDescription(R.string.news_edit_button)));
     private static final ViewInteraction filterNewsButton = onView(
             withId(R.id.filter_news_material_button));
     private static final ViewInteraction sortNewsButton = onView(
@@ -48,26 +46,26 @@ public class NewsControlPanel {
     }
 
     public static void tapOnFilterNewsButton() {
+//        Allure.step("User taps on Filter News Button");
         filterNewsButton.check(matches(isDisplayed()));
         filterNewsButton.perform(click());
     }
 
     public static void tapOnSortNewsButton() {
+//        Allure.step("User taps on Sort News Button");
         sortNewsButton.check(matches(isDisplayed()));
         sortNewsButton.perform(click());
     }
 
-//    public static void assertEditNewsButtonIsDisplayed () {
-//        editNewsButton.check(matches(isDisplayed()));
-//    }
-//
-//    public static void assertFilterNewsButtonIsDisplayed () {
-//        filterNewsButton.check(matches(isDisplayed()));
-//    }
-//
-//    public static void assertSortNewsButtonIsDisplayed () {
-//        sortNewsButton.check(matches(isDisplayed()));
-//    }
+    public static void assertFilterNewsButtonIsDisplayed () {
+//        Allure.step("Filter News Button is displayed");
+        filterNewsButton.check(matches(isDisplayed()));
+    }
+
+    public static void assertSortNewsButtonIsDisplayed () {
+//        Allure.step("Sort News Button is displayed");
+        sortNewsButton.check(matches(isDisplayed()));
+    }
 
     public static void assertNewsControlPanelLabelIsDisplayed() {
         newsControlPanelLabel.check(matches(isDisplayed()));
