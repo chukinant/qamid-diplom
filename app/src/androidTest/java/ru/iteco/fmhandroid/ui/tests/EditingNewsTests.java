@@ -90,7 +90,7 @@ public class EditingNewsTests {
     public void editNewsPublicationDate() {
         newsControlPanel.tapOnEditNewsCardButton(initialInfo);
         editingNewsDialog.assertTitleIsDisplayed();
-        NewsItemInfo editedInfo = NewsInfoHelper.getNewsInfoWithEditedPubDate(initialInfo);
+        NewsItemInfo editedInfo = NewsInfoHelper.getNewsInfoWithEditedPubDate(initialInfo, 1);
         int day = NewsInfoHelper.getDay(editedInfo.getPublicationDate());
         int month = NewsInfoHelper.getMonth(editedInfo.getPublicationDate());
         int year = NewsInfoHelper.getYear(editedInfo.getPublicationDate());

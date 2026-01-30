@@ -124,10 +124,12 @@ public class NewsInfoHelper {
         NewsInfoHelper.CategorySelection categorySelected = getAnotherCategory(initialInfo.getCategory());
         String category = categorySelected.getCategory();
         int position = categorySelected.getPosition();
+        String title = "Категория изменена с " + initialInfo.getCategory() + " на " + category +
+                ". Новость к публикации " + initialInfo.getPublicationDate() + " в " + initialInfo.getPublicationTime();
         return new NewsItemInfo (
                 category,
                 position,
-                initialInfo.getTitle(),
+                title,
                 initialInfo.getPublicationDate(),
                 initialInfo.getPublicationTime(),
                 initialInfo.getDescription(),
@@ -148,14 +150,31 @@ public class NewsInfoHelper {
                 initialInfo.getStatus());
     }
 
-    public static NewsItemInfo getNewsInfoWithEditedPubDate(NewsItemInfo initialInfo) {
+    public static NewsItemInfo getNewsInfoWithEditedPubDate(NewsItemInfo initialInfo, int daysToAdd) {
         String initialDate = initialInfo.getPublicationDate();
         LocalDate date = LocalDate.parse(initialDate, dateTimeFormatter);
-        String editedDate = date.plusDays(1).format(dateTimeFormatter);
+        String editedDate = date.plusDays(daysToAdd).format(dateTimeFormatter);
         return new NewsItemInfo (
                 initialInfo.getCategory(),
                 initialInfo.getPosition(),
                 initialInfo.getTitle(),
+                editedDate,
+                initialInfo.getPublicationTime(),
+                initialInfo.getDescription(),
+                initialInfo.getCreationDate(),
+                initialInfo.getStatus());
+    }
+
+    public static NewsItemInfo getNewsInfoWithAnotherPubDate(NewsItemInfo initialInfo, int daysToAdd) {
+        String initialDate = initialInfo.getPublicationDate();
+        LocalDate date = LocalDate.parse(initialDate, dateTimeFormatter);
+        String editedDate = date.plusDays(daysToAdd).format(dateTimeFormatter);
+        String title = initialInfo.getCategory() + ". Дата публикации изменена с " +
+                initialInfo.getPublicationDate() +  " на " + editedDate + " " + initialInfo.getPublicationTime();
+        return new NewsItemInfo (
+                initialInfo.getCategory(),
+                initialInfo.getPosition(),
+                title,
                 editedDate,
                 initialInfo.getPublicationTime(),
                 initialInfo.getDescription(),

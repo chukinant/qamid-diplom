@@ -43,7 +43,7 @@ public abstract class BaseNewsDialogSteps {
     }
 
     public void assignDate(int day, int month, int year) {
-//        Allure.step("User assigns date of " + daysAhead + " days ahead");
+        Allure.step("User assigns date of " + day + "." + month + "." + "year");
         datePickerDialog.assignDate(day, month, year);
     }
 

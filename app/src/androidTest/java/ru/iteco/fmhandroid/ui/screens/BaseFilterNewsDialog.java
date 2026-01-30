@@ -35,7 +35,7 @@ public class BaseFilterNewsDialog {
     protected static ViewInteraction endPubDateField = onView(allOf(
             isAssignableFrom(EditText.class),
             isDescendantOfA(withId(R.id.news_item_publish_date_end_text_input_layout))));
-    protected static ViewInteraction filterButton = onView(withId(R.id.save_button));
+    protected static ViewInteraction filterButton = onView(withId(R.id.filter_button));
     protected static ViewInteraction cancelButton = onView(withId(R.id.cancel_button));
 //    protected static final int savingFailedMsg = R.string.error_saving;
 //    protected static final int fillEmptyFieldsMsg = R.string.empty_fields;

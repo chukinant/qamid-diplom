@@ -1,5 +1,6 @@
 package ru.iteco.fmhandroid.ui.tests;
 
+import android.os.SystemClock;
 import android.view.View;
 
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
@@ -52,21 +53,50 @@ public class FilterSortNewsTests {
         newsScreen.assertNewsScreenLabelIsDisplayed();
         newsScreen.tapOnPanelEditButton();
         newsControlPanel.assertNewsControlPanelLabelIsDisplayed();
+        newsControlPanel.tapOnAddNewsButton();
     }
 
     @Test
-    @DisplayName("Фильтрация новостей по категории и промежутку даты")
-    @AllureId("24")
-    public void successfulNewsFiltering() {
-        NewsItemInfo newsItemInfo = NewsInfoHelper.getNewsInfoTodayDateMinuteAgo();
-        creatingNewsDialog.fillForm(newsItemInfo);
+    @DisplayName("Фильтрация новостей по промежутку даты")
+    @AllureId("24.1")
+    public void successfulNewsFilteringByPublishingDate() {
+        NewsItemInfo newsInitialInfo = NewsInfoHelper.getNewsInfoTodayDateMinuteAgo();
+        creatingNewsDialog.fillForm(newsInitialInfo);
         creatingNewsDialog.tapOnSaveButton();
-        newsControlPanel.assertNewsCardInfo(newsItemInfo);
-        navigationBar.goFromControlPanelToNewsScreen();
-        newsScreen.assertNewsScreenLabelIsDisplayed();
-        newsScreen.assertNewsCardInfo(newsItemInfo);
-        navigationBar.goFromNewsScreenToMain();
-        mainScreen.assertAllNewsLinkIsDisplayed();
-        mainScreen.assertNewsCardInfo(newsItemInfo);
+        newsControlPanel.assertNewsCardListed(newsInitialInfo);
+        NewsItemInfo newsFutureMonthInfo = NewsInfoHelper.getNewsInfoWithAnotherPubDate(newsInitialInfo, 31);
+        newsControlPanel.tapOnAddNewsButton();
+        creatingNewsDialog.fillForm(newsFutureMonthInfo);
+        creatingNewsDialog.tapOnSaveButton();
+        newsControlPanel.assertNewsCardListed(newsFutureMonthInfo);
+        newsControlPanel.tapOnFilterNewsButton();
+        controlPanelFilterDialog.tapOnStartPubDateField();
+        controlPanelFilterDialog.pickFirstDayOfMonth();
+        controlPanelFilterDialog.tapOnEndPubDateField();
+        controlPanelFilterDialog.pickLastDayOfMonth();
+        controlPanelFilterDialog.tapOnFilterButton();
+        newsControlPanel.assertNewsCardListed(newsInitialInfo);
+        newsControlPanel.assertCardIsNotOnTheList(newsFutureMonthInfo);
+    }
+
+    @Test
+    @DisplayName("Фильтрация новостей по категории")
+    @AllureId("24.2")
+    public void successfulNewsFilteringByCategory() {
+        NewsItemInfo newsInitialInfo = NewsInfoHelper.getNewsInfoTodayDateMinuteAgo();
+        creatingNewsDialog.fillForm(newsInitialInfo);
+        creatingNewsDialog.tapOnSaveButton();
+        newsControlPanel.assertNewsCardListed(newsInitialInfo);
+        NewsItemInfo newsAnotherCatInfo = NewsInfoHelper.getNewsInfoWithAnotherCategory(newsInitialInfo);
+        newsControlPanel.tapOnAddNewsButton();
+        creatingNewsDialog.fillForm(newsAnotherCatInfo);
+        creatingNewsDialog.tapOnSaveButton();
+        newsControlPanel.assertNewsCardListed(newsAnotherCatInfo);
+        newsControlPanel.tapOnFilterNewsButton();
+        controlPanelFilterDialog.tapOnCategoryField();
+        controlPanelFilterDialog.tapOnCategoryItemOnTheList(newsInitialInfo.getPosition());
+        controlPanelFilterDialog.tapOnFilterButton();
+        newsControlPanel.assertNewsCardListed(newsInitialInfo);
+        newsControlPanel.assertCardIsNotOnTheList(newsAnotherCatInfo);
     }
 }
