@@ -1,10 +1,18 @@
 package ru.iteco.fmhandroid.ui.steps;
 
+import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.RootMatchers.withDecorView;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
+
+import static org.hamcrest.CoreMatchers.not;
+
+import android.view.View;
 
 import io.qameta.allure.kotlin.Allure;
+import ru.iteco.fmhandroid.R;
 import ru.iteco.fmhandroid.ui.screens.BaseFilterNewsDialog;
 
 public class BaseFilterNewsDialogSteps {
@@ -79,5 +87,12 @@ public class BaseFilterNewsDialogSteps {
     public void assertEndPubDate(String date) {
         Allure.step("Assert chosen ending publication date");
         BaseFilterNewsDialog.assertEndPubDate(date);
+    }
+
+    public void assertWrongPeriodMsgIsDisplayed(View decorView) {
+        Allure.step("Toast msg that with text " + R.string.wrong_news_date_period + " is displayed");
+        onView(withText(R.string.wrong_news_date_period))
+                .inRoot(withDecorView(not(decorView)))
+                .check(matches(isDisplayed()));
     }
 }

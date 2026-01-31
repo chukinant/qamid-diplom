@@ -106,7 +106,7 @@ public class CreatingNewsTests {
         modalWindow.assertModalWindowIsDisplayed();
         modalWindow.assertCancellationMsgIsDisplayed();
         modalWindow.tapOnOkButton();
-        newsControlPanel.assertCardIsNotOnTheList(newsItemInfo);
+        newsControlPanel.assertNewsCardNotListed(newsItemInfo);
     }
 }
 

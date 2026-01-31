@@ -5,19 +5,19 @@
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="editNewsDescription()">
+      <SelectionState runConfigName="filteringNotActiveNews()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="editNewsActivityStatus()">
+      <SelectionState runConfigName="filteringWithNoParametersSpecified()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="successfulNewsCreationAndPublishing()">
+      <SelectionState runConfigName="filteringActiveNews()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="successfulNewsFiltering()">
+      <SelectionState runConfigName="filteringWithUncheckedCheckboxesActiveNotActive()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="successfulNewsFilteringByPublishingDate()">
+      <SelectionState runConfigName="successfulNewsFilteringByCategoryAndPubDate()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>

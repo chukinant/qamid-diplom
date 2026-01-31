@@ -6,16 +6,19 @@ import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.RootMatchers.isPlatformPopup;
+import static androidx.test.espresso.matcher.RootMatchers.withDecorView;
 import static androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom;
 import static androidx.test.espresso.matcher.ViewMatchers.isDescendantOfA;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.anything;
 import static ru.iteco.fmhandroid.ui.utils.ViewWaiterAndMatcher.waitUntilDisplayed;
 
+import android.view.View;
 import android.widget.EditText;
 
 import androidx.test.espresso.DataInteraction;
@@ -37,9 +40,8 @@ public class BaseFilterNewsDialog {
             isDescendantOfA(withId(R.id.news_item_publish_date_end_text_input_layout))));
     protected static ViewInteraction filterButton = onView(withId(R.id.filter_button));
     protected static ViewInteraction cancelButton = onView(withId(R.id.cancel_button));
-//    protected static final int savingFailedMsg = R.string.error_saving;
-//    protected static final int fillEmptyFieldsMsg = R.string.empty_fields;
-//    protected static final int changesWontBeSavedMsg = R.string.cancellation;
+    protected static final int wrongPeriodMsg = R.string.wrong_news_date_period;
+
 
     public static void assertIsOnScreen() {
 //        Allure.step("Filter News dialog is displayed");
@@ -114,5 +116,12 @@ public class BaseFilterNewsDialog {
 //      Allure.step("Assert chosen starting publication date");
         endPubDateField.check(matches(isDisplayed()));
         endPubDateField.check(matches(withText(date)));
+    }
+
+    public static void assertWrongPeriodMsgIsDisplayed(View decorView) {
+//        Allure.step("Toast msg that with text " + wrongPeriodMsg + " is displayed");
+        onView(withText(wrongPeriodMsg))
+                .inRoot(withDecorView(not(decorView)))
+                .check(matches(isDisplayed()));
     }
 }

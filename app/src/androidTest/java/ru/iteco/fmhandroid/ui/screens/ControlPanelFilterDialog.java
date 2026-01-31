@@ -16,23 +16,23 @@ import ru.iteco.fmhandroid.R;
 
 public class ControlPanelFilterDialog extends BaseFilterNewsDialog {
 
-    protected static ViewInteraction activeNewsCheckBox = onView(
+    protected static ViewInteraction activeNewsCheckbox = onView(
             allOf(withId(R.id.filter_news_active_material_check_box),
                     withText(R.string.news_control_panel_active)));
-    protected static ViewInteraction notActiveNewsCheckBox = onView(
+    protected static ViewInteraction notActiveNewsCheckbox = onView(
             allOf(withId(R.id.filter_news_inactive_material_check_box),
                     withText(R.string.news_control_panel_not_active)));
 
-    public static void uncheckActiveNewsCheckBox() {
+    public static void uncheckActiveNewsCheckbox() {
 //        Allure.step("User unchecks Active news checkbox");
-        assertChecked(activeNewsCheckBox);
-        tapOnCheckbox(activeNewsCheckBox);
+        assertChecked(activeNewsCheckbox);
+        tapOnCheckbox(activeNewsCheckbox);
     }
 
-    public static void uncheckNotActiveNewsCheckBox() {
+    public static void uncheckNotActiveNewsCheckbox() {
 //        Allure.step("User unchecks Not Active news checkbox");
-        assertChecked(notActiveNewsCheckBox);
-        tapOnCheckbox(notActiveNewsCheckBox);
+        assertChecked(notActiveNewsCheckbox);
+        tapOnCheckbox(notActiveNewsCheckbox);
     }
 
     public static void tapOnCheckbox(ViewInteraction checkbox) {

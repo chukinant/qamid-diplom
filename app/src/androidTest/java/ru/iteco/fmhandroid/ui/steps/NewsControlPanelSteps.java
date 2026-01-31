@@ -1,8 +1,6 @@
 package ru.iteco.fmhandroid.ui.steps;
 
 import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 
 import io.qameta.allure.kotlin.Allure;
 import ru.iteco.fmhandroid.ui.screens.ControlPanelNewsCard;
@@ -70,7 +68,7 @@ public class NewsControlPanelSteps {
         ControlPanelNewsCard.assertTitle(info);
     }
 
-    public void assertCardIsNotOnTheList(NewsItemInfo info) {
+    public void assertNewsCardNotListed(NewsItemInfo info) {
         Allure.step("Assert card is not on the list");
         ControlPanelNewsCard.assertNotOnTheList(info.getTitle());
     }

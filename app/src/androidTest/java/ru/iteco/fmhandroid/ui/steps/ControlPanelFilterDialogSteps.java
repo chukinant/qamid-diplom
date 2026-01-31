@@ -5,13 +5,13 @@ import ru.iteco.fmhandroid.ui.screens.ControlPanelFilterDialog;
 
 public class ControlPanelFilterDialogSteps extends BaseFilterNewsDialogSteps{
 
-    public static void uncheckActiveNewsCheckBox() {
+    public void uncheckActiveNewsCheckbox() {
         Allure.step("User unchecks Active news checkbox");
-        ControlPanelFilterDialog.uncheckActiveNewsCheckBox();
+        ControlPanelFilterDialog.uncheckActiveNewsCheckbox();
     }
 
-    public static void uncheckNotActiveNewsCheckBox() {
+    public void uncheckNotActiveNewsCheckbox() {
         Allure.step("User unchecks Not Active news checkbox");
-        ControlPanelFilterDialog.uncheckNotActiveNewsCheckBox();
+        ControlPanelFilterDialog.uncheckNotActiveNewsCheckbox();
     }
 }
