@@ -27,6 +27,7 @@ public class MainScreen {
     }
 
     public static void assertIsOnScreen() {
+        waitUntilIsDisplayed();
         onView(withId(waitingForID)).check(matches(isDisplayed()));
     }
 
@@ -36,7 +37,6 @@ public class MainScreen {
     }
 
     public static void assertAllNewsLinkIsDisplayed() {
-        waitUntilDisplayed(R.id.all_news_text_view,5000);
         allNewsLink.check(matches(isDisplayed()));
         allNewsLink.check(matches(withText(allNewsLinkText)));
     }

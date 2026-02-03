@@ -5,19 +5,19 @@
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="filteringNotActiveNews()">
+      <SelectionState runConfigName="loginSuccessfulTest()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="filteringWithNoParametersSpecified()">
+      <SelectionState runConfigName="successfulNewsCreationAndPublishing()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="filteringActiveNews()">
+      <SelectionState runConfigName="successfulNewsCreationNotPublished()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="filteringWithUncheckedCheckboxesActiveNotActive()">
+      <SelectionState runConfigName="cancelNewsCreation()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="successfulNewsFilteringByCategoryAndPubDate()">
+      <SelectionState runConfigName="fillEmptyFieldsMsgIfWithoutCategory()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>

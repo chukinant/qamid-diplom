@@ -4,10 +4,13 @@ import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
+
+import static ru.iteco.fmhandroid.ui.utils.ViewWaiterAndMatcher.waitUntilDisplayed;
 
 import androidx.test.espresso.ViewInteraction;
 
@@ -18,7 +21,7 @@ public class NavigationBar {
     private NavigationBar() {
     }
 
-    private static final int viewID = R.id.main_menu_image_button;
+    private static final int waitingForID = R.id.main_menu_image_button;
     private static final ViewInteraction hamburgerButton = onView(allOf(
             withId(R.id.main_menu_image_button),
             withContentDescription("Main menu")));
@@ -50,7 +53,8 @@ public class NavigationBar {
     }
 
     public static void assertIsOnScreen() {
-        onView(withId(viewID)).check(matches(isDisplayed()));
+        onView(isRoot()).perform(waitUntilDisplayed(waitingForID, 5000));
+        onView(withId(waitingForID)).check(matches(isDisplayed()));
     }
 
     public static void tapOnNavigationDrawer() {

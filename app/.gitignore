@@ -1,2 +1,2 @@
 /build
-/src/androidTest/java/ru/iteco/fmhandroid/ui/AppActivityTest.java
+/src/androidTest/java/ru/iteco/fmhandroid/ui/*.java

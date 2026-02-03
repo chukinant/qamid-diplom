@@ -14,4 +14,9 @@ public class MainScreenSteps extends BaseScreenSteps {
         Allure.step("User is redirected to Main screen");
         MainScreen.assertAllNewsLinkIsDisplayed();
     }
+
+    public void assertIsDisplayed() {
+        Allure.step("User is redirected to Main screen");
+        MainScreen.assertIsOnScreen();
+    }
 }

@@ -24,9 +24,9 @@ import ru.iteco.fmhandroid.ui.utils.TestStartup;
 public class LoginActivityTests {
 
     private View decorView;
-    private final AuthScreenSteps authScreenSteps = new AuthScreenSteps();
-    private final MainScreenSteps mainScreenSteps = new MainScreenSteps();
-    private final NavigationBarSteps navigationBarSteps = new NavigationBarSteps();
+    private final AuthScreenSteps authScreen = new AuthScreenSteps();
+    private final MainScreenSteps mainScreen = new MainScreenSteps();
+    private final NavigationBarSteps navigationBar = new NavigationBarSteps();
 
     @Rule
     public ActivityScenarioRule<AppActivity> activityRule =
@@ -45,45 +45,45 @@ public class LoginActivityTests {
     @DisplayName("Успешная авторизация")
     @AllureId("1")
     public void loginSuccessfulTest() {
-        authScreenSteps.loginAsValidUser();
-        navigationBarSteps.assertIsDisplayed();
-        mainScreenSteps.assertAllNewsLinkIsDisplayed();
+        authScreen.loginAsValidUser();
+        navigationBar.assertIsDisplayed();
+        mainScreen.assertIsDisplayed();
     }
 
     @Test
     @DisplayName("Авторизация с пустыми login и password")
     @AllureId("4")
     public void loginWithEmptyLoginAndPassword() {
-        authScreenSteps.loginWithEmptyLoginAndPassword();
-        authScreenSteps.assertLoginPasswordCannotBeEmptyMsgIsDisplayed(decorView);
-        authScreenSteps.assertIsDisplayed();
+        authScreen.loginWithEmptyLoginAndPassword();
+        authScreen.assertLoginPasswordCannotBeEmptyMsgIsDisplayed(decorView);
+        authScreen.assertIsDisplayed();
     }
 
     @Test
     @DisplayName("Авторизация с пустым полем login")
     @AllureId("2")
     public void loginWithEmptyLogin() {
-        authScreenSteps.loginWithEmptyLogin();
-        authScreenSteps.assertLoginPasswordCannotBeEmptyMsgIsDisplayed(decorView);
-        authScreenSteps.assertIsDisplayed();
+        authScreen.loginWithEmptyLogin();
+        authScreen.assertLoginPasswordCannotBeEmptyMsgIsDisplayed(decorView);
+        authScreen.assertIsDisplayed();
     }
 
     @Test
     @DisplayName("Авторизация с пустым полем password")
     @AllureId("3")
     public void loginWithEmptyPassword() {
-        authScreenSteps.loginWithEmptyPassword();
-        authScreenSteps.assertLoginPasswordCannotBeEmptyMsgIsDisplayed(decorView);
-        authScreenSteps.assertIsDisplayed();
+        authScreen.loginWithEmptyPassword();
+        authScreen.assertLoginPasswordCannotBeEmptyMsgIsDisplayed(decorView);
+        authScreen.assertIsDisplayed();
     }
 
     @Test
     @DisplayName("Авторизация с невалидными login и password")
     @AllureId("5")
     public void loginWithWrongLoginAndPassword() {
-        authScreenSteps.loginWithWrongLoginAndPassword();
-        authScreenSteps.assertWrongLoginPasswordMsgIsDisplayed(decorView);
-        authScreenSteps.assertIsDisplayed();
+        authScreen.loginWithWrongLoginAndPassword();
+        authScreen.assertWrongLoginPasswordMsgIsDisplayed(decorView);
+        authScreen.assertIsDisplayed();
     }
 
 }

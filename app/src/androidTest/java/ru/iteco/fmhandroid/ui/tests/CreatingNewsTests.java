@@ -67,7 +67,7 @@ public class CreatingNewsTests {
         newsScreen.assertNewsScreenLabelIsDisplayed();
         newsScreen.assertNewsCardInfo(newsItemInfo);
         navigationBar.goFromNewsScreenToMain();
-        mainScreen.assertAllNewsLinkIsDisplayed();
+        mainScreen.assertIsDisplayed();
         mainScreen.assertNewsCardInfo(newsItemInfo);
     }
 
@@ -88,11 +88,52 @@ public class CreatingNewsTests {
     }
 
     @Test
-    @DisplayName("Публикация новости без категории")
+    @DisplayName("Создание новости без категории")
     @AllureId("13")
     public void fillEmptyFieldsMsgIfWithoutCategory() {
         NewsItemInfo newsItemInfo = NewsInfoHelper.getNewsInfoTodayDateMinuteAgo();
-        creatingNewsDialog.createNewsWithoutCategory(newsItemInfo);
+        creatingNewsDialog.fillFormNoCategory(newsItemInfo);
+        creatingNewsDialog.tapOnSaveButton();
+        creatingNewsDialog.assertFillEmptyFieldsMsgIsDisplayed(decorView);
+    }
+
+    @Test
+    @DisplayName("Создание новости  с незаполненным полем 'Title'")
+    @AllureId("14")
+    public void fillEmptyFieldsMsgIfWithoutTitle() {
+        NewsItemInfo newsItemInfo = NewsInfoHelper.getNewsInfoTodayDateMinuteAgo();
+        creatingNewsDialog.fillFormNoTitle(newsItemInfo);
+        creatingNewsDialog.tapOnSaveButton();
+        creatingNewsDialog.assertFillEmptyFieldsMsgIsDisplayed(decorView);
+    }
+
+    @Test
+    @DisplayName("Создание новости  с незаполненным полем Дата публикации")
+    @AllureId("15")
+    public void fillEmptyFieldsMsgIfWithoutPubDate() {
+        NewsItemInfo newsItemInfo = NewsInfoHelper.getNewsInfoTodayDateMinuteAgo();
+        creatingNewsDialog.fillFormNoPubDate(newsItemInfo);
+        creatingNewsDialog.tapOnSaveButton();
+        creatingNewsDialog.assertFillEmptyFieldsMsgIsDisplayed(decorView);
+    }
+
+    @Test
+    @DisplayName("Создание новости  с незаполненным полем Время публикации")
+    @AllureId("16")
+    public void fillEmptyFieldsMsgIfWithoutPubTime() {
+        NewsItemInfo newsItemInfo = NewsInfoHelper.getNewsInfoTodayDateMinuteAgo();
+        creatingNewsDialog.fillFormNoPubTime(newsItemInfo);
+        creatingNewsDialog.tapOnSaveButton();
+        creatingNewsDialog.assertFillEmptyFieldsMsgIsDisplayed(decorView);
+    }
+
+    @Test
+    @DisplayName("Создание новости  с незаполненным полем 'Описание'")
+    @AllureId("17")
+    public void fillEmptyFieldsMsgIfWithoutDescription() {
+        NewsItemInfo newsItemInfo = NewsInfoHelper.getNewsInfoTodayDateMinuteAgo();
+        creatingNewsDialog.fillFormNoDescription(newsItemInfo);
+        creatingNewsDialog.tapOnSaveButton();
         creatingNewsDialog.assertFillEmptyFieldsMsgIsDisplayed(decorView);
     }
 

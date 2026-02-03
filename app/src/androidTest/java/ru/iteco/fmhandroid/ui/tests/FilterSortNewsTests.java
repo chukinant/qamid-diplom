@@ -1,18 +1,32 @@
 package ru.iteco.fmhandroid.ui.tests;
 
-import android.view.View;
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static org.junit.Assert.assertTrue;
 
+import android.view.View;
+import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.test.espresso.UiController;
+import androidx.test.espresso.ViewAction;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.filters.LargeTest;
 
+import org.hamcrest.Matcher;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import io.qameta.allure.android.runners.AllureAndroidJUnit4;
 import io.qameta.allure.kotlin.AllureId;
 import io.qameta.allure.kotlin.junit4.DisplayName;
+import ru.iteco.fmhandroid.R;
 import ru.iteco.fmhandroid.ui.AppActivity;
 import ru.iteco.fmhandroid.ui.steps.ControlPanelFilterDialogSteps;
 import ru.iteco.fmhandroid.ui.steps.CreateEditNewsModalSteps;
@@ -56,7 +70,7 @@ public class FilterSortNewsTests {
         newsControlPanel.assertNewsControlPanelLabelIsDisplayed();
     }
 
-    public void createNews(NewsItemInfo info){
+    public void createNews(NewsItemInfo info) {
         newsControlPanel.tapOnAddNewsButton();
         creatingNewsDialog.fillForm(info);
         creatingNewsDialog.tapOnSaveButton();
@@ -214,5 +228,103 @@ public class FilterSortNewsTests {
         controlPanelFilterDialog.assertIsOnScreen();
     }
 
+    @Test
+    @DisplayName("Сортировка новостей по убыванию")
+    @AllureId("23.1")
+    public void sortingNewsDescending() {
+        NewsItemInfo newsInitialInfo = NewsInfoHelper.getNewsInfoTodayDateMinuteAgo();
+        createNews(newsInitialInfo);
+        NewsItemInfo newsAnotherCatInfo1 = NewsInfoHelper.getNewsInfoWithAnotherCategory(newsInitialInfo);
+        createNews(newsAnotherCatInfo1);
+        NewsItemInfo newsAnotherCatInfo2 = NewsInfoHelper.getNewsInfoWithAnotherCategory(newsAnotherCatInfo1);
+        createNews(newsAnotherCatInfo2);
+        newsControlPanel.tapOnSortNewsButton();
+        List<String> newsTitles = getNewsTitles();
+        newsTitlesAreSortedDescending(newsTitles);
+    }
 
+    @Test
+    @DisplayName("Сортировка новостей по возрастанию")
+    @AllureId("23.2")
+    public void sortingNewsAscending() {
+        NewsItemInfo newsInitialInfo = NewsInfoHelper.getNewsInfoTodayDateMinuteAgo();
+        createNews(newsInitialInfo);
+        NewsItemInfo newsAnotherCatInfo1 = NewsInfoHelper.getNewsInfoWithAnotherCategory(newsInitialInfo);
+        createNews(newsAnotherCatInfo1);
+        NewsItemInfo newsAnotherCatInfo2 = NewsInfoHelper.getNewsInfoWithAnotherCategory(newsAnotherCatInfo1);
+        createNews(newsAnotherCatInfo2);
+        newsControlPanel.tapOnSortNewsButton();
+        newsControlPanel.tapOnSortNewsButton();
+        List<String> newsTitles = getNewsTitles();
+        newsTitlesAreSortedAscending(newsTitles);
+    }
+
+    public static List<String> getNewsTitles() {
+        final List<String> titles = new ArrayList<String>();
+
+        onView(withId(R.id.news_list_recycler_view))
+                .perform(new ViewAction() {
+
+                    @Override
+                    public Matcher<View> getConstraints() {
+                        return isAssignableFrom(RecyclerView.class);
+                    }
+
+                    @Override
+                    public String getDescription() {
+                        return "Extracting news titles";
+                    }
+
+                    @Override
+                    public void perform(UiController uiController, View view) {
+                        RecyclerView recyclerView = (RecyclerView) view;
+                        RecyclerView.Adapter adapter = recyclerView.getAdapter();
+
+                        for (int i = 0; i < adapter.getItemCount(); i++) {
+
+                            RecyclerView.ViewHolder holder =
+                                    recyclerView.findViewHolderForAdapterPosition(i);
+
+                            if (holder == null) {
+                                recyclerView.scrollToPosition(i);
+                                uiController.loopMainThreadUntilIdle();
+                                holder = recyclerView.findViewHolderForAdapterPosition(i);
+                            }
+
+                            TextView titleView =
+                                    (TextView) holder.itemView
+                                            .findViewById(R.id.news_item_title_text_view);
+
+                            titles.add(titleView.getText().toString());
+                        }
+                    }
+                });
+        return titles;
+    }
+
+    private void newsTitlesAreSortedAscending(List<String> titles) {
+        for (int i = 0; i < titles.size() - 1; i++) {
+            String current = titles.get(i);
+            String next = titles.get(i + 1);
+
+            assertTrue(
+                    "ASC sorting failed at index " + i +
+                            ": \"" + current + "\" > \"" + next + "\"",
+                    current.compareToIgnoreCase(next) <= 0
+            );
+        }
+    }
+
+    private void newsTitlesAreSortedDescending(List<String> titles) {
+        for (int i = 0; i < titles.size() - 1; i++) {
+            String current = titles.get(i);
+            String next = titles.get(i + 1);
+
+            assertTrue(
+                    "DESC sorting failed at index " + i +
+                            ": \"" + current + "\" < \"" + next + "\"",
+                    current.compareToIgnoreCase(next) >= 0
+            );
+        }
+    }
 }
