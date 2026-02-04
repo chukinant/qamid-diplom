@@ -27,7 +27,7 @@ public class NavigationBar {
             withContentDescription("Main menu")));
 
     private static final ViewInteraction ourMissionButton = onView(allOf(
-            withId(R.id.main_menu_image_button),
+            withId(R.id.our_mission_image_button),
             withContentDescription("Our Mission")));
 
     private static final ViewInteraction profileButton = onView(

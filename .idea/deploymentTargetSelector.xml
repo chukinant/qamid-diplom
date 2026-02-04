@@ -14,10 +14,10 @@
       <SelectionState runConfigName="successfulNewsCreationNotPublished()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="cancelNewsCreation()">
+      <SelectionState runConfigName="privacyPolicyRedirection()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="fillEmptyFieldsMsgIfWithoutCategory()">
+      <SelectionState runConfigName="termsOfUseRedirection()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>
